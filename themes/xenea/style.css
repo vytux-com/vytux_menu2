@@ -1,0 +1,42 @@
+/*
+// Style adjustments for xenea theme
+//
+// webtrees: Web based Family History software
+// Copyright (C) 2012 webtrees development team.
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+*/
+
+/* Main menu icon */
+#main-menu li#simpl_menu2 { /* This is the main menu icon. This is always required. */
+	background:url(menu.png) no-repeat 50% 50%; /*change image file name to your choice */
+	background-size:28px; /*precautionary, in case icons are not the right size;*/
+}
+
+/* sub-menu icon for "Edit menus" item. This is always required */
+#main-menu  li#simpl_menu2 ul li#simpl_menu2-edit {
+	background:url(menu-edit.png) no-repeat left 0;
+	background-size:22px; /*precautionary, in case icons are not the right size;*/
+}
+
+/* sub-menu icon for addtional items. Replace XXXX with the exact TITLE of your sub-menu items, WITH SPACES REMOVED (e.g. "simpl_menu2-MyForum" */
+#main-menu  li#simpl_menu2 ul li#simpl_menu2-XXX {
+	background:url(menu-small-XXX.png) no-repeat left 0; /*change image file name to your choice */
+	background-size:22px; /*precautionary, in case icons are not the right size;*/
+}
+/* copy the above sub-menu icon style for any additional sub-menus you require.  */
+
+html[dir=rtl] #main-menu li#simpl_menu2 ul li {background-position:right 0}
