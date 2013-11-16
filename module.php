@@ -1,5 +1,5 @@
 <?php
-// webtrees - vytux_menu2 module based on vytux_menu2
+// webtrees - vytux_menu2 module based on simpl_menu2
 //
 // Copyright (C) 2013 Vytautas Krivickas and vytux.com. All rights reserved.
 // 
@@ -237,6 +237,8 @@ class vytux_menu2_WT_Module extends WT_Module implements WT_Module_Menu, WT_Modu
 				$controller->setPageTitle(WT_I18N::translate('Add menu'));
 				$menu_access=1;
 				$new_tab=0;
+				$menu_title='';
+				$menu_address='';
 				$block_order=WT_DB::prepare(
 					"SELECT IFNULL(MAX(block_order)+1, 0) FROM `##block` WHERE module_name=?"
 				)->execute(array($this->getName()))->fetchOne();
