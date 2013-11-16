@@ -255,6 +255,7 @@ class vytux_menu2_WT_Module extends WT_Module implements WT_Module_Menu, WT_Modu
 				</style>
 				<div id="page_help">', help_link('add_menu', $this->getName()), '</div>
 				<form name="menu" method="post" action="#">
+					', WT_Filter::getCsrf() ,'
 					<input type="hidden" name="save" value="1">
 					<input type="hidden" name="block_id" value="', $block_id, '">
 					<div id="module_admin">
