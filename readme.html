@@ -317,7 +317,8 @@ BUT, if you only have one menu item, this title will be changed to the title of 
 <a name="upgrade"></a>
 <h2>Upgrade</h2>
 <p class="Body">As this is the first version to support webtrees 1.5 no upgrade path is possible</p>
-<p class="Body">Unfortunately even though this module is based on simpl_menu2 it cannot automatically import the old settings and as such all menu items will need to be re-created.</p>
+<p class="Body">Unfortunately even though this module is based on simpl_menu2 it cannot automatically import the old settings and as such all menu items will either need to be re-created or you could run this sql script over your database <strong>after</strong> enabling the new module.</p>
+<p class="Code3" class="Monospace">UPDATE `wt_block` SET `module_name`='vytux_menu2' WHERE `module_name`='simpl_menu2'</p>
 <a name="Support"></a>
 <h2>Contact Support</h2>
 <p class="Body">You can contact our support staff by one of the following:</p>
