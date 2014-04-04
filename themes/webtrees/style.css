@@ -32,7 +32,7 @@
 	background-size:24px; /*precautionary, in case icons are not the right size;*/
 }
 
-/* sub-menu icon for addtional items. Replace XXXX with the exact TITLE of your sub-menu items, WITH SPACES REMOVED (e.g. "simpl_menu3-MyForum" */
+/* sub-menu icon for addtional items. Replace XXXX with the exact TITLE of your sub-menu items, WITH SPACES REMOVED (e.g. "vytux_menu3-MyForum" */
 #main-menu  li#vytux_menu2 ul li#vytux_menu2-MyForum {
 	background:url(menu-small-XXXX.png) no-repeat left 0; /*change image file name to your choice */
 	background-size:24px; /*precautionary, in case icons are not the right size;*/
