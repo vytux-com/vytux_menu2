@@ -147,7 +147,7 @@ class vytux_menu2_WT_Module extends WT_Module implements WT_Module_Menu, WT_Modu
 				}
 			}
 		}
-		if (WT_USER_IS_ADMIN) {
+		if (\WT\Auth::isAdmin()) {
 			$submenu = new WT_Menu(WT_I18N::translate('Edit menus'), $this->getConfigLink(), $this->getName().'-edit');
 			$menu->addSubmenu($submenu);
 		}
