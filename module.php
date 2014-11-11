@@ -118,10 +118,6 @@ class vytux_menu2_WT_Module extends WT_Module implements WT_Module_Menu, WT_Modu
 			)->execute(array($default_block, 'menu_title'))->fetchOne();
 		}
 		
-		$main_menu_target = WT_DB::prepare(
-			"SELECT setting_value FROM `##block_setting` WHERE block_id=? AND setting_name=?"
-		)->execute(array($default_block, 'new_tab'))->fetchOne();
-
 		if ($SEARCH_SPIDER) {
 			return null;
 		}
@@ -135,16 +131,11 @@ class vytux_menu2_WT_Module extends WT_Module implements WT_Module_Menu, WT_Modu
 		//-- main menu item
 		$menu = new WT_Menu($main_menu_title, $main_menu_address, $this->getName(), 'down');
 		$menu->addClass('menuitem', 'menuitem_hover', '');
-		if ($main_menu_target == 1) {$menu->addTarget('_blank');}
 		foreach ($menu_titles as $items) {
 			if (count($menu_titles)>1) {
 				$languages=get_block_setting($items->block_id, 'languages');
 				if ((!$languages || in_array(WT_LOCALE, explode(',', $languages))) && $items->menu_access>=WT_USER_ACCESS_LEVEL) {
 					$submenu = new WT_Menu(WT_I18N::translate($items->menu_title), $items->menu_address, $this->getName().'-'.str_replace(' ', '', $items->menu_title));
-					$target = get_block_setting($items->block_id, 'new_tab', 0);
-					if ($target == 1) {
-						$submenu->addTarget('_blank');
-					}
 					$menu->addSubmenu($submenu);
 				}
 			}
@@ -211,7 +202,6 @@ class vytux_menu2_WT_Module extends WT_Module implements WT_Module_Menu, WT_Modu
 			set_block_setting($block_id, 'menu_title',		WT_Filter::post('menu_title'));
 			set_block_setting($block_id, 'menu_address',	WT_Filter::post('menu_address'));
 			set_block_setting($block_id, 'menu_access',		WT_Filter::post('menu_access'));
-			set_block_setting($block_id, 'new_tab',			WT_Filter::post('new_tab'));
 			$languages=array();
 			foreach (WT_I18N::installed_languages() as $code=>$name) {
 				if (WT_Filter::postBool('lang_'.$code)) {
@@ -228,7 +218,6 @@ class vytux_menu2_WT_Module extends WT_Module implements WT_Module_Menu, WT_Modu
 				$menu_title=get_block_setting($block_id, 'menu_title');
 				$menu_address=get_block_setting($block_id, 'menu_address');
 				$menu_access=get_block_setting($block_id, 'menu_access');
-				$new_tab=get_block_setting($block_id, 'new_tab');
 				$block_order=WT_DB::prepare(
 					"SELECT block_order FROM `##block` WHERE block_id=?"
 				)->execute(array($block_id))->fetchOne();
@@ -238,7 +227,6 @@ class vytux_menu2_WT_Module extends WT_Module implements WT_Module_Menu, WT_Modu
 			} else {
 				$controller->setPageTitle(WT_I18N::translate('Add menu'));
 				$menu_access=1;
-				$new_tab=0;
 				$menu_title='';
 				$menu_address='';
 				$block_order=WT_DB::prepare(
@@ -273,8 +261,6 @@ class vytux_menu2_WT_Module extends WT_Module implements WT_Module_Menu, WT_Modu
 							<input type="text" id="block_order" name="block_order" size="3" tabindex="4" value="', $block_order, '">
 						<label for "gedcom_id">', WT_I18N::translate('Menu visibility'), help_link('menu_visibility', $this->getName()), '</label>';
 							echo select_edit_control('gedcom_id', WT_Tree::getIdList(), '', $gedcom_id, 'tabindex="5"'),'
-						<label for "new_tab">', WT_I18N::translate('Open menu in new tab or window'), help_link('new_tab', $this->getName()), '</label>';
-							echo checkbox('new_tab', $new_tab, 'tabindex="6"'),'
 					</div>
 					<div id="module_lang">
 						<label for "languages">', WT_I18N::translate('Show this menu for which languages?'), '</label>';
@@ -282,8 +268,8 @@ class vytux_menu2_WT_Module extends WT_Module implements WT_Module_Menu, WT_Modu
 							echo edit_language_checkboxes('lang_', $languages),'
 					</div>
 					<div id="module_save">
-						<input type="submit" value="', WT_I18N::translate('Save'), '" tabindex="7">
-						&nbsp;<input type="button" value="', WT_I18N::translate('Cancel'), '" onclick="window.location=\''.$this->getConfigLink().'\';" tabindex="8">
+						<input type="submit" value="', WT_I18N::translate('Save'), '" tabindex="6">
+						&nbsp;<input type="button" value="', WT_I18N::translate('Cancel'), '" onclick="window.location=\''.$this->getConfigLink().'\';" tabindex="7">
 					</div>
 				</form>',
 			exit;
