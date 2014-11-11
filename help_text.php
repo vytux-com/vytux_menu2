@@ -64,9 +64,4 @@ case 'moveup_menu':
 	$title=WT_I18N::translate('Move menu up');
 	$text=WT_I18N::translate('This option will let you move a menu item upwards.').'<br><br>'.WT_I18N::translate('Each time you use this option, the position number of this menu item is reduced by one. You can achieve the same effect by editing the menu item and changing the menu position field.').'<br><br>'.WT_I18N::translate('When more than one menu item has the same position number, only one of these menu items will be visible.');
 	break;
-
-	case 'new_tab':
-	$title=WT_I18N::translate('Open menu in new tab or window');
-	$text=WT_I18N::translate('Normally you would expect clicking on a menu item to open that page in the existing browser window or tab. But if you need it to open in a new window or tab you can tick this option.');
-	break;
 }
