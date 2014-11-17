@@ -21,8 +21,12 @@ msgid "Add menu item"
 msgstr "Opret menu"
 
 #: help_text.php:34
-msgid "The menu should contains menu items. Using this option you can add menu details."
-msgstr "Menuen bør indeholde menuer. Ved brug af denne funktion kan du oprette menu detaljer"
+msgid ""
+"The menu should contains menu items. Using this option you can add menu "
+"details."
+msgstr ""
+"Menuen bør indeholde menuer. Ved brug af denne funktion kan du oprette menu "
+"detaljer"
 
 #: help_text.php:38 module.php:265
 msgid "Menu position"
@@ -33,19 +37,35 @@ msgid "This field controls the order in which the menu items are displayed."
 msgstr "Administrer rækkefølgen af menu visningen"
 
 #: help_text.php:39
-msgid "You do not have to enter the numbers sequentially. If you leave holes in the numbering scheme, you can insert other menu items later. For example, if you use the numbers 1, 6, 11, 16, you can later insert menu items with the missing sequence numbers. Negative numbers and zero are allowed, and can be used to insert menu items in front of the first one."
-msgstr "Du behøver ikke at indtaste tallene sekventielt. Hvis du lader huller i nummerering, kan du indsætte andre menupunkter senere. For eksempel, hvis du bruger tallene 1, 6, 11, 16, kan du senere indsætte menupunkter med de manglende sekvensnumre. Negative tal og nul er tilladt, og kan bruges til at indsætte menupunkter foran den første."
+msgid ""
+"You do not have to enter the numbers sequentially. If you leave holes in the "
+"numbering scheme, you can insert other menu items later. For example, if you "
+"use the numbers 1, 6, 11, 16, you can later insert menu items with the "
+"missing sequence numbers. Negative numbers and zero are allowed, and can be "
+"used to insert menu items in front of the first one."
+msgstr ""
+"Du behøver ikke at indtaste tallene sekventielt. Hvis du lader huller i "
+"nummerering, kan du indsætte andre menupunkter senere. For eksempel, hvis du "
+"bruger tallene 1, 6, 11, 16, kan du senere indsætte menupunkter med de "
+"manglende sekvensnumre. Negative tal og nul er tilladt, og kan bruges til at "
+"indsætte menupunkter foran den første."
 
 #: help_text.php:39 help_text.php:60 help_text.php:65
-msgid "When more than one menu item has the same position number, only one of these menu items will be visible."
-msgstr "Hvis flere menu punkter har samme placeringsnummer, kun een af disse vil blive vist"
+msgid ""
+"When more than one menu item has the same position number, only one of these "
+"menu items will be visible."
+msgstr ""
+"Hvis flere menu punkter har samme placeringsnummer, kun een af disse vil "
+"blive vist"
 
 #: help_text.php:43 module.php:267
 msgid "Menu visibility"
 msgstr "Synlighed"
 
 #: help_text.php:44
-msgid "You can determine whether this menu item will be visible regardless of family tree, or whether it will be visible only to the current family tree."
+msgid ""
+"You can determine whether this menu item will be visible regardless of "
+"family tree, or whether it will be visible only to the current family tree."
 msgstr "Synlighed kun for det aktuelle træ eller flere"
 
 #: help_text.php:45 module.php:397
@@ -85,8 +105,14 @@ msgid "This option will let you move a menu item downwards."
 msgstr "Denne funktion tillader dig at rykke menu positionen ned"
 
 #: help_text.php:60
-msgid "Each time you use this option, the position number of this menu item is increased by one. You can achieve the same effect by editing the menu item and changing the menu position field."
-msgstr "Hver gang du bruger denne mulighed, er nummeret på dette menupunkt forøges med én. Du kan opnå samme effekt ved at redigere menupunktet og ændre menuens position"
+msgid ""
+"Each time you use this option, the position number of this menu item is "
+"increased by one. You can achieve the same effect by editing the menu item "
+"and changing the menu position field."
+msgstr ""
+"Hver gang du bruger denne mulighed, er nummeret på dette menupunkt forøges "
+"med én. Du kan opnå samme effekt ved at redigere menupunktet og ændre "
+"menuens position"
 
 #: help_text.php:64
 msgid "Move menu up"
@@ -97,18 +123,31 @@ msgid "This option will let you move a menu item upwards."
 msgstr "Denne funktion tillader dig at rykke menu positionen op"
 
 #: help_text.php:65
-msgid "Each time you use this option, the position number of this menu item is reduced by one. You can achieve the same effect by editing the menu item and changing the menu position field."
-msgstr "Hver gang du bruger denne mulighed, er nummeret på dette menupunkt reduceres med én. Du kan opnå samme effekt ved at redigere menupunktet og ændre menuens position"
+msgid ""
+"Each time you use this option, the position number of this menu item is "
+"reduced by one. You can achieve the same effect by editing the menu item and "
+"changing the menu position field."
+msgstr ""
+"Hver gang du bruger denne mulighed, er nummeret på dette menupunkt reduceres "
+"med én. Du kan opnå samme effekt ved at redigere menupunktet og ændre "
+"menuens position"
 
 #: help_text.php:69 module.php:269
 msgid "Open menu in new tab or window"
 msgstr "Åbn i et nyt vindue eller fane"
 
 #: help_text.php:70
-msgid "Normally you would expect clicking on a menu item to open that page in the existing browser window or tab. But if you need it to open in a new window or tab you can tick this option."
-msgstr "Normalt vil et menupunkt åbne på den pågældende side i det eksisterende vindue eller faneblad browser. Men hvis du har brug for det til at åbne i et nyt vindue eller faneblad kan du afkrydse denne mulighed."
+msgid ""
+"Normally you would expect clicking on a menu item to open that page in the "
+"existing browser window or tab. But if you need it to open in a new window "
+"or tab you can tick this option."
+msgstr ""
+"Normalt vil et menupunkt åbne på den pågældende side i det eksisterende "
+"vindue eller faneblad browser. Men hvis du har brug for det til at åbne i et "
+"nyt vindue eller faneblad kan du afkrydse denne mulighed."
 
 # Do not translate. Already in webtrees core.
+#. Do not translate. Already in webtrees core.
 #: module.php:36
 msgid "Menu"
 msgstr ""
@@ -126,6 +165,7 @@ msgid "Add menu"
 msgstr "Opret menu"
 
 # Do not translate. Already in webtrees core.
+#. Do not translate. Already in webtrees core.
 #: module.php:259
 msgid "Title"
 msgstr ""
@@ -143,6 +183,7 @@ msgid "Add your menu address here"
 msgstr "Opret link/menu adresse"
 
 # Do not translate. Already in webtrees core.
+#. Do not translate. Already in webtrees core.
 #: module.php:263
 msgid "Access level"
 msgstr ""
@@ -152,21 +193,25 @@ msgid "Show this menu for which languages?"
 msgstr "Vælg sprog"
 
 # Do not translate. Already in webtrees core.
+#. Do not translate. Already in webtrees core.
 #: module.php:278
 msgid "Save"
 msgstr ""
 
 # Do not translate. Already in webtrees core.
+#. Do not translate. Already in webtrees core.
 #: module.php:279
 msgid "Cancel"
 msgstr ""
 
 # Do not translate. Already in webtrees core.
+#. Do not translate. Already in webtrees core.
 #: module.php:377
 msgid "Family tree"
 msgstr ""
 
 # Do not translate. Already in webtrees core.
+#. Do not translate. Already in webtrees core.
 #: module.php:381
 msgid "show"
 msgstr ""
@@ -176,11 +221,13 @@ msgid "The menu is empty."
 msgstr "Menuen er tom"
 
 # Do not translate. Already in webtrees core.
+#. Do not translate. Already in webtrees core.
 #: module.php:395
 msgid "Position item"
 msgstr ""
 
 # Do not translate. Already in webtrees core.
+#. Do not translate. Already in webtrees core.
 #: module.php:418
 msgid "Edit"
 msgstr ""
@@ -190,6 +237,11 @@ msgid "Are you sure you want to delete this menu item?"
 msgstr "Er du sikker på du vil slette denne menu?"
 
 # Do not translate. Already in webtrees core.
+#. Do not translate. Already in webtrees core.
 #: module.php:421
 msgid "Delete"
+msgstr ""
+
+#: module.php:57
+msgid "Vytux_menu2"
 msgstr ""

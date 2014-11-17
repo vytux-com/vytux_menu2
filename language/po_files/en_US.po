@@ -109,6 +109,7 @@ msgid "Normally you would expect clicking on a menu item to open that page in th
 msgstr ""
 
 # Do not translate. Already in webtrees core.
+#. Do not translate. Already in webtrees core.
 #: module.php:36
 msgid "Menu"
 msgstr ""
@@ -126,6 +127,7 @@ msgid "Add menu"
 msgstr ""
 
 # Do not translate. Already in webtrees core.
+#. Do not translate. Already in webtrees core.
 #: module.php:259
 msgid "Title"
 msgstr ""
@@ -143,6 +145,7 @@ msgid "Add your menu address here"
 msgstr ""
 
 # Do not translate. Already in webtrees core.
+#. Do not translate. Already in webtrees core.
 #: module.php:263
 msgid "Access level"
 msgstr ""
@@ -152,21 +155,25 @@ msgid "Show this menu for which languages?"
 msgstr ""
 
 # Do not translate. Already in webtrees core.
+#. Do not translate. Already in webtrees core.
 #: module.php:278
 msgid "Save"
 msgstr ""
 
 # Do not translate. Already in webtrees core.
+#. Do not translate. Already in webtrees core.
 #: module.php:279
 msgid "Cancel"
 msgstr ""
 
 # Do not translate. Already in webtrees core.
+#. Do not translate. Already in webtrees core.
 #: module.php:377
 msgid "Family tree"
 msgstr ""
 
 # Do not translate. Already in webtrees core.
+#. Do not translate. Already in webtrees core.
 #: module.php:381
 msgid "show"
 msgstr ""
@@ -176,11 +183,13 @@ msgid "The menu is empty."
 msgstr ""
 
 # Do not translate. Already in webtrees core.
+#. Do not translate. Already in webtrees core.
 #: module.php:395
 msgid "Position item"
 msgstr ""
 
 # Do not translate. Already in webtrees core.
+#. Do not translate. Already in webtrees core.
 #: module.php:418
 msgid "Edit"
 msgstr ""
@@ -190,6 +199,11 @@ msgid "Are you sure you want to delete this menu item?"
 msgstr ""
 
 # Do not translate. Already in webtrees core.
+#. Do not translate. Already in webtrees core.
 #: module.php:421
 msgid "Delete"
+msgstr ""
+
+#: module.php:57
+msgid "Vytux_menu2"
 msgstr ""
