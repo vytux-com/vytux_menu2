@@ -1,7 +1,7 @@
 <?php
 // webtrees - vytux_menu2 module based on simpl_menu2
 //
-// Copyright (C) 2013 Vytautas Krivickas and vytux.com. All rights reserved.
+// Copyright (C) 2014 Vytautas Krivickas and vytux.com. All rights reserved.
 // 
 // Copyright (C) 2013 Nigel Osborne and kiwtrees.net. All rights reserved.
 //
@@ -31,6 +31,27 @@ if (!defined('WT_WEBTREES')) {
 
 class vytux_menu2_WT_Module extends WT_Module implements WT_Module_Menu, WT_Module_Block, WT_Module_Config {
 
+	public function __construct() {
+		parent::__construct();
+		// Load any local user translations
+		if (is_dir(WT_MODULES_DIR.$this->getName().'/language')) {
+			if (file_exists(WT_MODULES_DIR.$this->getName().'/language/'.WT_LOCALE.'.mo')) {
+				Zend_Registry::get('Zend_Translate')->addTranslation(
+					new Zend_Translate('gettext', WT_MODULES_DIR.$this->getName().'/language/'.WT_LOCALE.'.mo', WT_LOCALE)
+				);
+			}
+			if (file_exists(WT_MODULES_DIR.$this->getName().'/language/'.WT_LOCALE.'.php')) {
+				Zend_Registry::get('Zend_Translate')->addTranslation(
+					new Zend_Translate('array', WT_MODULES_DIR.$this->getName().'/language/'.WT_LOCALE.'.php', WT_LOCALE)
+				);
+			}
+			if (file_exists(WT_MODULES_DIR.$this->getName().'/language/'.WT_LOCALE.'.csv')) {
+				Zend_Registry::get('Zend_Translate')->addTranslation(
+					new Zend_Translate('csv', WT_MODULES_DIR.$this->getName().'/language/'.WT_LOCALE.'.csv', WT_LOCALE)
+				);
+			}
+		}
+	}
 	// Extend class WT_Module
 	public function getTitle() {
 		return 'Vytux_menu2';
