@@ -52,9 +52,10 @@ class vytux_menu2_WT_Module extends WT_Module implements WT_Module_Menu, WT_Modu
 			}
 		}
 	}
+
 	// Extend class WT_Module
 	public function getTitle() {
-		return WT_I18N::translate('Vytux_menu2');
+		return WT_I18N::translate('Vytux Menu 2');
 	}
 
 	public function getMenuTitle() {

@@ -243,5 +243,5 @@ msgid "Delete"
 msgstr ""
 
 #: module.php:57
-msgid "Vytux_menu2"
+msgid "Vytux Menu 2"
 msgstr ""
