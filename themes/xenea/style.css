@@ -22,19 +22,19 @@
 
 /* Main menu icon */
 #main-menu li#vytux_menu2 { /* This is the main menu icon. This is always required. */
-	background:url(menu.png) no-repeat 50% 50% !important; /*change image file name to your choice */
+	background:url(menu.png) no-repeat 50% 50%; /*change image file name to your choice */
 	background-size:28px; /*precautionary, in case icons are not the right size;*/
 }
 
 /* sub-menu icon for "Edit menus" item. This is always required */
 #main-menu  li#vytux_menu2 ul li#vytux_menu2-edit {
-	background:url(menu-edit.png) no-repeat left 0 !important;
+	background:url(menu-edit.png) no-repeat left 0;
 	background-size:22px; /*precautionary, in case icons are not the right size;*/
 }
 
 /* sub-menu icon for addtional items. Replace XXXX with the exact TITLE of your sub-menu items, WITH SPACES REMOVED (e.g. "vytux_menu2-MyForum" */
 #main-menu  li#vytux_menu2 ul li#vytux_menu2-XXX {
-	background:url(menu-small-XXX.png) no-repeat left 0 !important; /*change image file name to your choice */
+	background:url(menu-small-XXX.png) no-repeat left 0; /*change image file name to your choice */
 	background-size:22px; /*precautionary, in case icons are not the right size;*/
 }
 /* copy the above sub-menu icon style for any additional sub-menus you require.  */
