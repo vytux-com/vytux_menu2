@@ -253,44 +253,142 @@ class vytux_menu2_WT_Module extends WT_Module implements WT_Module_Menu, WT_Modu
 				$gedcom_id=WT_GED_ID;
 			}
 			$controller->pageHeader();
-
-			echo '<style>
-					#module_admin, #module_lang {background:#fdf5e6;border: 1px inset #d9d6c4;margin: 0 0 10px 0;padding: 5px;overflow:hidden;}
-					#module_admin {float:left;width:450px;}
-					#module_lang {float:left;margin:0 30px;}
-					#module_admin label {float:left;clear:both;line-height:20px; margin-top:10px;}
-					#module_admin input, #module_admin select {float:left;clear:both;height:25px;font-size:110%;}
-					#module_save {clear:both;}
-					html[dir=rtl] #module_admin, html[dir=rtl] #module_lang, html[dir=rtl] #module_admin input, html[dir=rtl] #module_admin select, html[dir=rtl] #module_admin label {float:right;}
-				</style>
-				<div id="page_help">', help_link('add_menu', $this->getName()), '</div>
-				<form name="menu" method="post" action="#">
-					', WT_Filter::getCsrf() ,'
-					<input type="hidden" name="save" value="1">
-					<input type="hidden" name="block_id" value="', $block_id, '">
-					<div id="module_admin">
-						<label for "menu_title">', WT_I18N::translate('Title'), '</label>
-							<input type="text" id="menu_title" name="menu_title" size="51" tabindex="1" value="', $menu_title, '" placeholder="', WT_I18N::translate('Add your menu title here'), '" autofocus>
-						<label for "menu_title">', WT_I18N::translate('Menu address'), '</label>
-							<input type="text" id="menu_address" name="menu_address" size="51" tabindex="2" value="', $menu_address, '" placeholder="', WT_I18N::translate('Add your menu address here'), '">
-						<label for "menu_access">', WT_I18N::translate('Access level'), '</label>';
-							echo edit_field_access_level('menu_access', $menu_access, 'tabindex="3"'),'
-						<label for "block_order">', WT_I18N::translate('Menu position'), help_link('menu_position', $this->getName()), '</label>
-							<input type="text" id="block_order" name="block_order" size="3" tabindex="4" value="', $block_order, '">
-						<label for "gedcom_id">', WT_I18N::translate('Menu visibility'), help_link('menu_visibility', $this->getName()), '</label>';
-							echo select_edit_control('gedcom_id', WT_Tree::getIdList(), '', $gedcom_id, 'tabindex="5"'),'
+			?>
+			
+			<ol class="breadcrumb small">
+				<li><a href="admin.php"><?php echo WT_I18N::translate('Control panel'); ?></a></li>
+				<li><a href="admin_modules.php"><?php echo WT_I18N::translate('Module administration'); ?></a></li>
+				<li><a href="module.php?mod=<?php echo $this->getName(); ?>&mod_action=admin_config"><?php echo WT_I18N::translate($this->getTitle()); ?></a></li>
+				<li class="active"><?php echo $controller->getPageTitle(); ?></li>
+			</ol>
+			
+			<form class="form-horizontal" method="POST" action="#" name="menu" id="menuForm">
+				<?php echo WT_Filter::getCsrf(); ?>
+				<input type="hidden" name="save" value="1">
+				<input type="hidden" name="block_id" value="<?php echo $block_id; ?>">
+				<h3><?php echo WT_I18N::translate('General'); ?></h3>
+				
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="menu_title">
+						<?php echo WT_I18N::translate('Title'); ?>
+					</label>
+					<div class="col-sm-9">
+						<input
+							class="form-control"
+							id="menu_title"
+							size="90"
+							name="menu_title"
+							required
+							type="text"
+							value="<?php echo WT_Filter::escapeHtml($menu_title); ?>"
+							>
 					</div>
-					<div id="module_lang">
-						<label for "languages">', WT_I18N::translate('Show this menu for which languages?'), '</label>';
-							$languages=get_block_setting($block_id, 'languages');
-							echo edit_language_checkboxes('lang_', $languages),'
+					<span class="help-block col-sm-9 col-sm-offset-3 small text-muted">
+						<?php echo WT_I18N::translate('Add your menu title here'); ?>
+					</span>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="menu_address">
+						<?php echo WT_I18N::translate('Menu address'); ?>
+					</label>
+					<div class="col-sm-9">
+						<input
+							class="form-control"
+							id="menu_address"
+							size="90"
+							name="menu_address"
+							required
+							type="text"
+							value="<?php echo WT_Filter::escapeHtml($menu_address); ?>"
+							>
 					</div>
-					<div id="module_save">
-						<input type="submit" value="', WT_I18N::translate('Save'), '" tabindex="6">
-						&nbsp;<input type="button" value="', WT_I18N::translate('Cancel'), '" onclick="window.location=\''.$this->getConfigLink().'\';" tabindex="7">
+					<span class="help-block col-sm-9 col-sm-offset-3 small text-muted">
+						<?php echo WT_I18N::translate('Add your menu address here'); ?>
+					</span>
+				</div>
+				
+				<h3><?php echo WT_I18N::translate('Languages'); ?></h3>
+				
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="lang_*">
+						<?php echo WT_I18N::translate('Show this menu for which languages?'); ?>
+					</label>
+					<div class="row col-sm-9">
+						<?php 
+							$accepted_languages=explode(',', get_block_setting($block_id, 'languages'));
+							foreach (WT_I18N::installed_languages() as $locale => $language) {
+								$checked = in_array($locale, $accepted_languages) ? 'checked' : ''; 
+						?>
+								<div class="col-sm-3">
+									<label class="checkbox-inline "><input type="checkbox" name="lang_<?php echo $locale; ?>" <?php echo $checked; ?> ><?php echo $language; ?></label>
+								</div>
+						<?php 
+							}
+						?>
 					</div>
-				</form>',
-			exit;
+				</div>
+				
+				<h3><?php echo WT_I18N::translate('Visibility and Access'); ?></h3>
+				
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="block_order">
+						<?php echo WT_I18N::translate('Menu position'); ?>
+					</label>
+					<div class="col-sm-9">
+						<input
+							class="form-control"
+							id="position"
+							name="block_order"
+							size="3"
+							required
+							type="number"
+							value="<?php echo WT_Filter::escapeHtml($block_order); ?>"
+						>
+					</div>
+					<span class="help-block col-sm-9 col-sm-offset-3 small text-muted">
+						<?php 
+							echo WT_I18N::translate('This field controls the order in which the menu items are displayed.'),
+							'<br><br>',
+							WT_I18N::translate('You do not have to enter the numbers sequentially. If you leave holes in the numbering scheme, you can insert other menu items later. For example, if you use the numbers 1, 6, 11, 16, you can later insert menu items with the missing sequence numbers. Negative numbers and zero are allowed, and can be used to insert menu items in front of the first one.'),
+							'<br><br>',
+							WT_I18N::translate('When more than one menu item has the same position number, only one of these menu items will be visible.');
+						?>
+					</span>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="block_order">
+						<?php echo WT_I18N::translate('Menu visibility'); ?>
+					</label>
+					<div class="col-sm-9">
+						<?php echo select_edit_control('gedcom_id', WT_Tree::getIdList(), WT_I18N::translate('All'), $gedcom_id, 'class="form-control"'); ?>
+					</div>
+					<span class="help-block col-sm-9 col-sm-offset-3 small text-muted">
+						<?php 
+							echo WT_I18N::translate('You can determine whether this menu item will be visible regardless of family tree, or whether it will be visible only to the current family tree.');
+						?>
+					</span>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="menu_access">
+						<?php echo WT_I18N::translate('Access level'); ?>
+					</label>
+					<div class="col-sm-9">
+						<?php echo edit_field_access_level('menu_access', $menu_access, 'class="form-control"'); ?>
+					</div>
+				</div>
+				
+				<div class="row col-sm-9 col-sm-offset-3">
+					<button class="btn btn-primary" type="submit">
+						<i class="fa fa-check"></i>
+						<?php echo WT_I18N::translate('save'); ?>
+					</button>
+					<button class="btn" type="button" onclick="window.location='<?php echo $this->getConfigLink(); ?>';">
+						<i class="fa fa-close"></i>
+						<?php echo WT_I18N::translate('cancel'); ?>
+					</button>
+				</div>
+			</form>
+<?php
 		}
 	}
 
