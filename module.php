@@ -1,5 +1,5 @@
 <?php
-namespace Webtrees;
+namespace Fisharebest\Webtrees;
 
 // webtrees - vytux_menu2 module based on simpl_menu2
 //
