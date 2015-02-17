@@ -104,7 +104,7 @@ class vytux_menu2_WT_Module extends Module implements ModuleBlockInterface, Modu
 
 	// Implement WT_Module_Menu
 	public function getMenu() {
-		global $controller, $SEARCH_SPIDER;
+		global $controller;
 		$menu_titles = $this->getMenuList();	
 		$lang = '';
 		
@@ -137,7 +137,7 @@ class vytux_menu2_WT_Module extends Module implements ModuleBlockInterface, Modu
 			)->execute(array($default_block, 'menu_title'))->fetchOne();
 		}
 		
-		if ($SEARCH_SPIDER) {
+		if (Auth::isSearchEngine()) {
 			return null;
 		}
 		
