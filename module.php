@@ -609,7 +609,7 @@ class vytux_menu2_WT_Module extends Module implements ModuleBlockInterface, Modu
 				<p>
 					<a href="module.php?mod=<?php echo $this->getName(); ?>&amp;mod_action=admin_edit" class="btn btn-primary">
 						<i class="fa fa-plus"></i>
-						<?php echo I18N::translate('Add page'); ?>
+						<?php echo I18N::translate('Add Menu'); ?>
 					</a>
 				</p>
 			</div>
