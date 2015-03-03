@@ -26,10 +26,10 @@ namespace Fisharebest\Webtrees;
 //
 use Zend_Translate;
 
-class vytux_menu2_WT_Module extends Module implements ModuleBlockInterface, ModuleConfigInterface, ModuleMenuInterface {
+class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleConfigInterface, ModuleMenuInterface {
 
 	public function __construct() {
-		parent::__construct();
+		parent::__construct('vytux_menu2');
 		// Load any local user translations
 		if (is_dir(WT_MODULES_DIR . $this->getName() . '/language')) {
 			if (file_exists(WT_MODULES_DIR . $this->getName() . '/language/' . WT_LOCALE . '.mo')) {
@@ -708,3 +708,4 @@ class vytux_menu2_WT_Module extends Module implements ModuleBlockInterface, Modu
 	}
 	
 }
+return new VytuxMenu2Module;
