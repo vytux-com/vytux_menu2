@@ -1,5 +1,5 @@
 <?php
-namespace Fisharebest\Webtrees;
+namespace Vytux\webtrees_vytux_menu2;
 
 // webtrees - vytux_menu2 module based on simpl_menu2
 //
@@ -25,25 +25,26 @@ namespace Fisharebest\Webtrees;
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
 use Zend_Translate;
+use Fisharebest\Webtrees as webtrees;
 
-class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleConfigInterface, ModuleMenuInterface {
+class VytuxMenu2MenuModule extends webtrees\Module implements webtrees\ModuleBlockInterface, webtrees\ModuleConfigInterface, webtrees\ModuleMenuInterface {
 
 	public function __construct() {
 		parent::__construct('vytux_menu2');
 		// Load any local user translations
 		if (is_dir(WT_MODULES_DIR . $this->getName() . '/language')) {
 			if (file_exists(WT_MODULES_DIR . $this->getName() . '/language/' . WT_LOCALE . '.mo')) {
-				I18N::addTranslation(
+				webtrees\I18N::addTranslation(
 					new Zend_Translate('gettext', WT_MODULES_DIR . $this->getName() . '/language/' . WT_LOCALE . '.mo', WT_LOCALE)
 				);
 			}
 			if (file_exists(WT_MODULES_DIR . $this->getName() . '/language/' . WT_LOCALE . '.php')) {
-				I18N::addTranslation(
+				webtrees\I18N::addTranslation(
 					new Zend_Translate('array', WT_MODULES_DIR . $this->getName() . '/language/' . WT_LOCALE . '.php', WT_LOCALE)
 				);
 			}
 			if (file_exists(WT_MODULES_DIR . $this->getName() . '/language/' . WT_LOCALE . '.csv')) {
-				I18N::addTranslation(
+				webtrees\I18N::addTranslation(
 					new Zend_Translate('csv', WT_MODULES_DIR . $this->getName() . '/language/' . WT_LOCALE . '.csv', WT_LOCALE)
 				);
 			}
@@ -52,16 +53,16 @@ class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleCon
 
 	// Extend class WT_Module
 	public function getTitle() {
-		return I18N::translate('Vytux Menu 2');
+		return webtrees\I18N::translate('Vytux Menu 2');
 	}
 
 	public function getMenuTitle() {
-		return I18N::translate('Menu');
+		return webtrees\I18N::translate('Menu');
 	}
 
 	// Extend class WT_Module
 	public function getDescription() {
-		return I18N::translate('Provides links to custom defined pages.');
+		return webtrees\I18N::translate('Provides links to custom defined pages.');
 	}
 
 	// Implement WT_Module_Menu
@@ -71,7 +72,7 @@ class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleCon
 
 	// Extend class WT_Module
 	public function defaultAccessLevel() {
-		return WT_PRIV_NONE;
+		return webtrees\Auth::PRIV_NONE;
 	}
 
 	// Implement WT_Module_Config
@@ -104,16 +105,16 @@ class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleCon
 
 	// Implement WT_Module_Menu
 	public function getMenu() {
-		global $controller;
+		global $controller, $WT_TREE;
 		$menu_titles = $this->getMenuList();	
 		$lang = '';
 		
-		$min_block = Database::prepare(
+		$min_block = webtrees\Database::prepare(
 			"SELECT MIN(block_order) FROM `##block` WHERE module_name=?"
 		)->execute(array($this->getName()))->fetchOne();
 		
 		foreach ($menu_titles as $items) {
-			$languages = get_block_setting($items->block_id, 'languages');
+			$languages = webtrees\get_block_setting($items->block_id, 'languages');
 			if (in_array(WT_LOCALE, explode(',', $languages))) {
 				$lang = WT_LOCALE;
 			} else {
@@ -121,46 +122,46 @@ class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleCon
 			}
 		}
 
-		$default_block = Database::prepare(
+		$default_block = webtrees\Database::prepare(
 			"SELECT ##block.block_id FROM `##block`, `##block_setting` WHERE block_order=? AND module_name=? AND ##block.block_id = ##block_setting.block_id AND ##block_setting.setting_value LIKE ?"
 		)->execute(array($min_block, $this->getName(), '%' . $lang . '%'))->fetchOne();
 		
-		$main_menu_address = Database::prepare(
+		$main_menu_address = webtrees\Database::prepare(
 			"SELECT setting_value FROM `##block_setting` WHERE block_id=? AND setting_name=?"
 		)->execute(array($default_block, 'menu_address'))->fetchOne();
 		
 		if (count($menu_titles)>1) {
 			$main_menu_title = $this->getMenuTitle();
 		} else {
-			$main_menu_title = Database::prepare(
+			$main_menu_title = webtrees\Database::prepare(
 				"SELECT setting_value FROM `##block_setting` WHERE block_id=? AND setting_name=?"
 			)->execute(array($default_block, 'menu_title'))->fetchOne();
 		}
 		
-		if (Auth::isSearchEngine()) {
+		if (webtrees\Auth::isSearchEngine()) {
 			return null;
 		}
 		
-		if (file_exists(WT_MODULES_DIR . $this->getName() . '/themes/' . Theme::theme()->themeId() . '/')) {
-			echo '<link rel="stylesheet" href="' . WT_MODULES_DIR . $this->getName() . '/themes/' . Theme::theme()->themeId() . '/style.css" type="text/css">';
+		if (file_exists(WT_MODULES_DIR . $this->getName() . '/themes/' . webtrees\Theme::theme()->themeId() . '/')) {
+			echo '<link rel="stylesheet" href="' . WT_MODULES_DIR . $this->getName() . '/themes/' . webtrees\Theme::theme()->themeId() . '/style.css" type="text/css">';
 		} else {
 			echo '<link rel="stylesheet" href="' . WT_MODULES_DIR . $this->getName() . '/themes/webtrees/style.css" type="text/css">';
 		}
 
 		//-- main menu item
-		$menu = new Menu($main_menu_title, $main_menu_address, $this->getName(), 'down');
+		$menu = new webtrees\Menu($main_menu_title, $main_menu_address, $this->getName(), 'down');
 		$menu->addClass('menuitem', 'menuitem_hover', '');
 		foreach ($menu_titles as $items) {
 			if (count($menu_titles)>1) {
-				$languages = get_block_setting($items->block_id, 'languages');
-				if ((!$languages || in_array(WT_LOCALE, explode(',', $languages))) && $items->menu_access >= WT_USER_ACCESS_LEVEL) {
-					$submenu = new Menu(I18N::translate($items->menu_title), $items->menu_address, $this->getName() . '-' . str_replace(' ', '', $items->menu_title));
+				$languages = webtrees\get_block_setting($items->block_id, 'languages');
+				if ((!$languages || in_array(WT_LOCALE, explode(',', $languages))) && $items->menu_access >= webtrees\Auth::accessLevel($WT_TREE)) {
+					$submenu = new webtrees\Menu(webtrees\I18N::translate($items->menu_title), $items->menu_address, $this->getName() . '-' . str_replace(' ', '', $items->menu_title));
 					$menu->addSubmenu($submenu);
 				}
 			}
 		}
-		if (Auth::isAdmin()) {
-			$submenu = new Menu(I18N::translate('Edit menus'), $this->getConfigLink(), $this->getName() . '-edit');
+		if (webtrees\Auth::isAdmin()) {
+			$submenu = new webtrees\Menu(webtrees\I18N::translate('Edit menus'), $this->getConfigLink(), $this->getName() . '-edit');
 			$menu->addSubmenu($submenu);
 		}
 		return $menu;
@@ -197,81 +198,83 @@ class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleCon
 
 	// Action from the configuration page
 	private function edit() {
-		if (Filter::postBool('save') && Filter::checkCsrf()) {
-			$block_id = Filter::post('block_id');
+		global $WT_TREE;
+		
+		if (webtrees\Filter::postBool('save') && webtrees\Filter::checkCsrf()) {
+			$block_id = webtrees\Filter::post('block_id');
 			if ($block_id) {
-				Database::prepare(
+				webtrees\Database::prepare(
 					"UPDATE `##block` SET gedcom_id=NULLIF(?, ''), block_order=? WHERE block_id=?"
 				)->execute(array(
-					Filter::post('gedcom_id'),
-					(int)Filter::post('block_order'),
+					webtrees\Filter::post('gedcom_id'),
+					(int)webtrees\Filter::post('block_order'),
 					$block_id
 				));
 			} else {
-				Database::prepare(
+				webtrees\Database::prepare(
 					"INSERT INTO `##block` (gedcom_id, module_name, block_order) VALUES (NULLIF(?, ''), ?, ?)"
 				)->execute(array(
-					Filter::post('gedcom_id'),
+					webtrees\Filter::post('gedcom_id'),
 					$this->getName(),
-					(int)Filter::post('block_order')
+					(int)webtrees\Filter::post('block_order')
 				));
-				$block_id = Database::getInstance()->lastInsertId();
+				$block_id = webtrees\Database::getInstance()->lastInsertId();
 			}
-			set_block_setting($block_id, 'menu_title',		Filter::post('menu_title'));
-			set_block_setting($block_id, 'menu_address',	Filter::post('menu_address'));
-			set_block_setting($block_id, 'menu_access',		Filter::post('menu_access'));
+			webtrees\set_block_setting($block_id, 'menu_title',		webtrees\Filter::post('menu_title'));
+			webtrees\set_block_setting($block_id, 'menu_address',	webtrees\Filter::post('menu_address'));
+			webtrees\set_block_setting($block_id, 'menu_access',		webtrees\Filter::post('menu_access'));
 			$languages = array();
-			foreach (I18N::installed_languages() as $code=>$name) {
-				if (Filter::postBool('lang_' . $code)) {
+			foreach (webtrees\I18N::installedLanguages() as $code=>$name) {
+				if (webtrees\Filter::postBool('lang_' . $code)) {
 					$languages[] = $code;
 				}
 			}
-			set_block_setting($block_id, 'languages', implode(',', $languages));
+			webtrees\set_block_setting($block_id, 'languages', implode(',', $languages));
 			$this->config();
 		} else {
-			$block_id = Filter::get('block_id');
-			$controller = new PageController();
-			$controller->restrictAccess(WT_USER_CAN_EDIT);
+			$block_id = webtrees\Filter::get('block_id');
+			$controller = new webtrees\PageController();
+			$controller->restrictAccess(webtrees\Auth::isEditor($WT_TREE));
 			if ($block_id) {
-				$controller->setPageTitle(I18N::translate('Edit menu'));
-				$menu_title   = get_block_setting($block_id, 'menu_title');
-				$menu_address = get_block_setting($block_id, 'menu_address');
-				$menu_access  = get_block_setting($block_id, 'menu_access');
-				$block_order  = Database::prepare(
+				$controller->setPageTitle(webtrees\I18N::translate('Edit menu'));
+				$menu_title   = webtrees\get_block_setting($block_id, 'menu_title');
+				$menu_address = webtrees\get_block_setting($block_id, 'menu_address');
+				$menu_access  = webtrees\get_block_setting($block_id, 'menu_access');
+				$block_order  = webtrees\Database::prepare(
 					"SELECT block_order FROM `##block` WHERE block_id=?"
 				)->execute(array($block_id))->fetchOne();
-				$gedcom_id    = Database::prepare(
+				$gedcom_id    = webtrees\Database::prepare(
 					"SELECT gedcom_id FROM `##block` WHERE block_id=?"
 				)->execute(array($block_id))->fetchOne();
 			} else {
-				$controller->setPageTitle(I18N::translate('Add menu'));
+				$controller->setPageTitle(webtrees\I18N::translate('Add menu'));
 				$menu_access  = 1;
 				$menu_title   = '';
 				$menu_address = '';
-				$block_order  = Database::prepare(
+				$block_order  = webtrees\Database::prepare(
 					"SELECT IFNULL(MAX(block_order)+1, 0) FROM `##block` WHERE module_name=?"
 				)->execute(array($this->getName()))->fetchOne();
-				$gedcom_id    = WT_GED_ID;
+                $gedcom_id    = $WT_TREE->getTreeId();
 			}
 			$controller->pageHeader();
 			?>
 			
 			<ol class="breadcrumb small">
-				<li><a href="admin.php"><?php echo I18N::translate('Control panel'); ?></a></li>
-				<li><a href="admin_modules.php"><?php echo I18N::translate('Module administration'); ?></a></li>
-				<li><a href="module.php?mod=<?php echo $this->getName(); ?>&mod_action=admin_config"><?php echo I18N::translate($this->getTitle()); ?></a></li>
+				<li><a href="admin.php"><?php echo webtrees\I18N::translate('Control panel'); ?></a></li>
+				<li><a href="admin_modules.php"><?php echo webtrees\I18N::translate('Module administration'); ?></a></li>
+				<li><a href="module.php?mod=<?php echo $this->getName(); ?>&mod_action=admin_config"><?php echo webtrees\I18N::translate($this->getTitle()); ?></a></li>
 				<li class="active"><?php echo $controller->getPageTitle(); ?></li>
 			</ol>
 			
 			<form class="form-horizontal" method="POST" action="#" name="menu" id="menuForm">
-				<?php echo Filter::getCsrf(); ?>
+				<?php echo webtrees\Filter::getCsrf(); ?>
 				<input type="hidden" name="save" value="1">
 				<input type="hidden" name="block_id" value="<?php echo $block_id; ?>">
-				<h3><?php echo I18N::translate('General'); ?></h3>
+				<h3><?php echo webtrees\I18N::translate('General'); ?></h3>
 				
 				<div class="form-group">
 					<label class="control-label col-sm-3" for="menu_title">
-						<?php echo I18N::translate('Title'); ?>
+						<?php echo webtrees\I18N::translate('Title'); ?>
 					</label>
 					<div class="col-sm-9">
 						<input
@@ -281,16 +284,16 @@ class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleCon
 							name="menu_title"
 							required
 							type="text"
-							value="<?php echo Filter::escapeHtml($menu_title); ?>"
+							value="<?php echo webtrees\Filter::escapeHtml($menu_title); ?>"
 							>
 					</div>
 					<span class="help-block col-sm-9 col-sm-offset-3 small text-muted">
-						<?php echo I18N::translate('Add your menu title here'); ?>
+						<?php echo webtrees\I18N::translate('Add your menu title here'); ?>
 					</span>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-3" for="menu_address">
-						<?php echo I18N::translate('Menu address'); ?>
+						<?php echo webtrees\I18N::translate('Menu address'); ?>
 					</label>
 					<div class="col-sm-9">
 						<input
@@ -300,24 +303,24 @@ class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleCon
 							name="menu_address"
 							required
 							type="text"
-							value="<?php echo Filter::escapeHtml($menu_address); ?>"
+							value="<?php echo webtrees\Filter::escapeHtml($menu_address); ?>"
 							>
 					</div>
 					<span class="help-block col-sm-9 col-sm-offset-3 small text-muted">
-						<?php echo I18N::translate('Add your menu address here'); ?>
+						<?php echo webtrees\I18N::translate('Add your menu address here'); ?>
 					</span>
 				</div>
 				
-				<h3><?php echo I18N::translate('Languages'); ?></h3>
+				<h3><?php echo webtrees\I18N::translate('Languages'); ?></h3>
 				
 				<div class="form-group">
 					<label class="control-label col-sm-3" for="lang_*">
-						<?php echo I18N::translate('Show this menu for which languages?'); ?>
+						<?php echo webtrees\I18N::translate('Show this menu for which languages?'); ?>
 					</label>
 					<div class="row col-sm-9">
 						<?php 
-							$accepted_languages=explode(',', get_block_setting($block_id, 'languages'));
-							foreach (I18N::installed_languages() as $locale => $language) {
+							$accepted_languages=explode(',', webtrees\get_block_setting($block_id, 'languages'));
+							foreach (webtrees\I18N::installedLanguages() as $locale => $language) {
 								$checked = in_array($locale, $accepted_languages) ? 'checked' : ''; 
 						?>
 								<div class="col-sm-3">
@@ -329,11 +332,11 @@ class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleCon
 					</div>
 				</div>
 				
-				<h3><?php echo I18N::translate('Visibility and Access'); ?></h3>
+				<h3><?php echo webtrees\I18N::translate('Visibility and Access'); ?></h3>
 				
 				<div class="form-group">
 					<label class="control-label col-sm-3" for="block_order">
-						<?php echo I18N::translate('Menu position'); ?>
+						<?php echo webtrees\I18N::translate('Menu position'); ?>
 					</label>
 					<div class="col-sm-9">
 						<input
@@ -343,49 +346,49 @@ class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleCon
 							size="3"
 							required
 							type="number"
-							value="<?php echo Filter::escapeHtml($block_order); ?>"
+							value="<?php echo webtrees\Filter::escapeHtml($block_order); ?>"
 						>
 					</div>
 					<span class="help-block col-sm-9 col-sm-offset-3 small text-muted">
 						<?php 
-							echo I18N::translate('This field controls the order in which the menu items are displayed.'),
+							echo webtrees\I18N::translate('This field controls the order in which the menu items are displayed.'),
 							'<br><br>',
-							I18N::translate('You do not have to enter the numbers sequentially. If you leave holes in the numbering scheme, you can insert other menu items later. For example, if you use the numbers 1, 6, 11, 16, you can later insert menu items with the missing sequence numbers. Negative numbers and zero are allowed, and can be used to insert menu items in front of the first one.'),
+							webtrees\I18N::translate('You do not have to enter the numbers sequentially. If you leave holes in the numbering scheme, you can insert other menu items later. For example, if you use the numbers 1, 6, 11, 16, you can later insert menu items with the missing sequence numbers. Negative numbers and zero are allowed, and can be used to insert menu items in front of the first one.'),
 							'<br><br>',
-							I18N::translate('When more than one menu item has the same position number, only one of these menu items will be visible.');
+							webtrees\I18N::translate('When more than one menu item has the same position number, only one of these menu items will be visible.');
 						?>
 					</span>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-3" for="block_order">
-						<?php echo I18N::translate('Menu visibility'); ?>
+						<?php echo webtrees\I18N::translate('Menu visibility'); ?>
 					</label>
 					<div class="col-sm-9">
-						<?php echo select_edit_control('gedcom_id', Tree::getIdList(), I18N::translate('All'), $gedcom_id, 'class="form-control"'); ?>
+						<?php echo webtrees\select_edit_control('gedcom_id', webtrees\Tree::getIdList(), webtrees\I18N::translate('All'), $WT_TREE->getTreeId(), 'class="form-control"'); ?>
 					</div>
 					<span class="help-block col-sm-9 col-sm-offset-3 small text-muted">
 						<?php 
-							echo I18N::translate('You can determine whether this menu item will be visible regardless of family tree, or whether it will be visible only to the current family tree.');
+							echo webtrees\I18N::translate('You can determine whether this menu item will be visible regardless of family tree, or whether it will be visible only to the current family tree.');
 						?>
 					</span>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-3" for="menu_access">
-						<?php echo I18N::translate('Access level'); ?>
+						<?php echo webtrees\I18N::translate('Access level'); ?>
 					</label>
 					<div class="col-sm-9">
-						<?php echo edit_field_access_level('menu_access', $menu_access, 'class="form-control"'); ?>
+						<?php echo webtrees\edit_field_access_level('menu_access', $menu_access, 'class="form-control"'); ?>
 					</div>
 				</div>
 				
 				<div class="row col-sm-9 col-sm-offset-3">
 					<button class="btn btn-primary" type="submit">
 						<i class="fa fa-check"></i>
-						<?php echo I18N::translate('save'); ?>
+						<?php echo webtrees\I18N::translate('save'); ?>
 					</button>
 					<button class="btn" type="button" onclick="window.location='<?php echo $this->getConfigLink(); ?>';">
 						<i class="fa fa-close"></i>
-						<?php echo I18N::translate('cancel'); ?>
+						<?php echo webtrees\I18N::translate('cancel'); ?>
 					</button>
 				</div>
 			</form>
@@ -394,14 +397,16 @@ class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleCon
 	}
 
 	private function delete() {
-		if (WT_USER_GEDCOM_ADMIN) {
-			$block_id = Filter::get('block_id');
+		global $WT_TREE;
 
-			Database::prepare(
+        if (webtrees\Auth::isManager($WT_TREE)) {
+			$block_id = webtrees\Filter::get('block_id');
+
+			webtrees\Database::prepare(
 				"DELETE FROM `##block_setting` WHERE block_id=?"
 			)->execute(array($block_id));
 
-			Database::prepare(
+			webtrees\Database::prepare(
 				"DELETE FROM `##block` WHERE block_id=?"
 			)->execute(array($block_id));
 		} else {
@@ -411,14 +416,16 @@ class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleCon
 	}
 
 	private function moveUp() {
-		if (WT_USER_GEDCOM_ADMIN) {
-			$block_id = Filter::get('block_id');
+		global $WT_TREE;
 
-			$block_order = Database::prepare(
+        if (webtrees\Auth::isManager($WT_TREE)) {
+			$block_id = webtrees\Filter::get('block_id');
+
+			$block_order = webtrees\Database::prepare(
 				"SELECT block_order FROM `##block` WHERE block_id=?"
 			)->execute(array($block_id))->fetchOne();
 
-			$swap_block = Database::prepare(
+			$swap_block = webtrees\Database::prepare(
 				"SELECT block_order, block_id".
 				" FROM `##block`".
 				" WHERE block_order=(".
@@ -427,10 +434,10 @@ class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleCon
 				" LIMIT 1"
 			)->execute(array($block_order, $this->getName(), $this->getName()))->fetchOneRow();
 			if ($swap_block) {
-				Database::prepare(
+				webtrees\Database::prepare(
 					"UPDATE `##block` SET block_order=? WHERE block_id=?"
 				)->execute(array($swap_block->block_order, $block_id));
-				Database::prepare(
+				webtrees\Database::prepare(
 					"UPDATE `##block` SET block_order=? WHERE block_id=?"
 				)->execute(array($block_order, $swap_block->block_id));
 			}
@@ -441,14 +448,16 @@ class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleCon
 	}
 
 	private function moveDown() {
-		if (WT_USER_GEDCOM_ADMIN) {
-			$block_id = Filter::get('block_id');
+		global $WT_TREE;
 
-			$block_order = Database::prepare(
+        if (webtrees\Auth::isManager($WT_TREE)) {
+			$block_id = webtrees\Filter::get('block_id');
+
+			$block_order = webtrees\Database::prepare(
 				"SELECT block_order FROM `##block` WHERE block_id=?"
 			)->execute(array($block_id))->fetchOne();
 
-			$swap_block = Database::prepare(
+			$swap_block = webtrees\Database::prepare(
 				"SELECT block_order, block_id".
 				" FROM `##block`".
 				" WHERE block_order=(".
@@ -457,10 +466,10 @@ class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleCon
 				" LIMIT 1"
 			)->execute(array($block_order, $this->getName(), $this->getName()))->fetchOneRow();
 			if ($swap_block) {
-				Database::prepare(
+				webtrees\Database::prepare(
 					"UPDATE `##block` SET block_order=? WHERE block_id=?"
 				)->execute(array($swap_block->block_order, $block_id));
-				Database::prepare(
+				webtrees\Database::prepare(
 					"UPDATE `##block` SET block_order=? WHERE block_id=?"
 				)->execute(array($block_order, $swap_block->block_id));
 			}
@@ -471,31 +480,36 @@ class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleCon
 	}
 
 	private function config() {
-		$controller = new PageController();
+		global $WT_TREE;
+		$controller = new webtrees\PageController();
 		$controller
-			->restrictAccess(WT_USER_GEDCOM_ADMIN)
+			->restrictAccess(webtrees\Auth::isManager($WT_TREE))
 			->setPageTitle($this->getTitle())
 			->pageHeader();
 
-		$items = Database::prepare(
+		$args                = array();
+		$args['module_name'] = $this->getName();
+        $args['tree_id']     = $WT_TREE->getTreeId();
+		$items = webtrees\Database::prepare(
 			"SELECT block_id, block_order, gedcom_id, bs1.setting_value AS menu_title, bs2.setting_value AS menu_address".
 			" FROM `##block` b".
 			" JOIN `##block_setting` bs1 USING (block_id)".
 			" JOIN `##block_setting` bs2 USING (block_id)".
-			" WHERE module_name=?".
-			" AND bs1.setting_name='menu_title'".
-			" AND bs2.setting_name='menu_address'".
-			" AND IFNULL(gedcom_id, ?)=?".
+			" WHERE module_name = :module_name".
+			" AND bs1.setting_name = 'menu_title'".
+			" AND bs2.setting_name = 'menu_address'".
+			" AND IFNULL(gedcom_id, :tree_id) = :tree_id".
 			" ORDER BY block_order"
-		)->execute(array($this->getName(), WT_GED_ID, WT_GED_ID))->fetchAll();
+		)->execute($args)->fetchAll();
 
-		$min_block_order = Database::prepare(
-			"SELECT MIN(block_order) FROM `##block` WHERE module_name=?"
-		)->execute(array($this->getName()))->fetchOne();
+		unset($args['tree_id']);
+		$min_block_order = webtrees\Database::prepare(
+			"SELECT MIN(block_order) FROM `##block` WHERE module_name = :module_name"
+		)->execute($args)->fetchOne();
 
-		$max_block_order = Database::prepare(
-			"SELECT MAX(block_order) FROM `##block` WHERE module_name=?"
-		)->execute(array($this->getName()))->fetchOne();
+		$max_block_order = webtrees\Database::prepare(
+			"SELECT MAX(block_order) FROM `##block` WHERE module_name = :module_name"
+		)->execute($args)->fetchOne();
 		?>
 		
 		<style>
@@ -583,8 +597,8 @@ class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleCon
 		</style>
 		
 		<ol class="breadcrumb small">
-			<li><a href="admin.php"><?php echo I18N::translate('Control panel'); ?></a></li>
-			<li><a href="admin_modules.php"><?php echo I18N::translate('Module administration'); ?></a></li>
+			<li><a href="admin.php"><?php echo webtrees\I18N::translate('Control panel'); ?></a></li>
+			<li><a href="admin_modules.php"><?php echo webtrees\I18N::translate('Module administration'); ?></a></li>
 			<li class="active"><?php echo $controller->getPageTitle(); ?></li>
 		</ol>
 		
@@ -592,15 +606,15 @@ class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleCon
 			<div class="col-sm-4 col-xs-12">
 				<form class="form">
 					<label for="ged" class="sr-only">
-						<?php echo I18N::translate('Family tree'); ?>
+						<?php echo webtrees\I18N::translate('Family tree'); ?>
 					</label>
 					<input type="hidden" name="mod" value="<?php echo  $this->getName(); ?>">
 					<input type="hidden" name="mod_action" value="admin_config">
 					<div class="col-sm-9 col-xs-9" style="padding:0;">
-						<?php echo select_edit_control('ged', Tree::getNameList(), null, WT_GEDCOM, 'class="form-control"'); ?>
+						<?php echo webtrees\select_edit_control('ged', webtrees\Tree::getNameList(), null, $WT_TREE->getName(), 'class="form-control"'); ?>
 					</div>
 					<div class="col-sm-3" style="padding:0;">
-						<input type="submit" class="btn btn-primary" value="<?php echo I18N::translate('show'); ?>">
+						<input type="submit" class="btn btn-primary" value="<?php echo webtrees\I18N::translate('show'); ?>">
 					</div>
 				</form>
 			</div>
@@ -609,7 +623,7 @@ class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleCon
 				<p>
 					<a href="module.php?mod=<?php echo $this->getName(); ?>&amp;mod_action=admin_edit" class="btn btn-primary">
 						<i class="fa fa-plus"></i>
-						<?php echo I18N::translate('Add Menu'); ?>
+						<?php echo webtrees\I18N::translate('Add Menu'); ?>
 					</a>
 				</p>
 			</div>
@@ -618,7 +632,7 @@ class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleCon
 				if (file_exists(WT_MODULES_DIR . $this->getName() . '/readme.html')) { ?>
 					<a href="<?php echo WT_MODULES_DIR . $this->getName(); ?>/readme.html" class="btn btn-info">
 						<i class="fa fa-newspaper-o"></i>
-						<?php echo I18N::translate('ReadMe'); ?>
+						<?php echo webtrees\I18N::translate('ReadMe'); ?>
 					</a>
 				<?php } ?>
 			</div>
@@ -627,10 +641,10 @@ class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleCon
 		<table class="table table-bordered table-condensed">
 			<thead>
 				<tr>
-					<th class="col-sm-2"><?php echo I18N::translate('Position'); ?></th>
-					<th class="col-sm-4"><?php echo I18N::translate('Menu title'); ?></th>
-					<th class="col-sm-4"><?php echo I18N::translate('Menu address'); ?></th>
-					<th class="col-sm-2" colspan=4><?php echo I18N::translate('Controls'); ?></th>
+					<th class="col-sm-2"><?php echo webtrees\I18N::translate('Position'); ?></th>
+					<th class="col-sm-4"><?php echo webtrees\I18N::translate('Menu title'); ?></th>
+					<th class="col-sm-4"><?php echo webtrees\I18N::translate('Menu address'); ?></th>
+					<th class="col-sm-2" colspan=4><?php echo webtrees\I18N::translate('Controls'); ?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -639,16 +653,16 @@ class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleCon
 					<td>
 						<?php echo $item->block_order, ', ';
 						if ($item->gedcom_id == null) {
-							echo I18N::translate('All');
+							echo webtrees\I18N::translate('All');
 						} else {
-							echo Tree::findById($item->gedcom_id)->getTitleHtml();
+							echo webtrees\Tree::findById($item->gedcom_id)->getTitleHtml();
 						} ?>
 					</td>
 					<td>
-						<?php echo Filter::escapeHtml(I18N::translate($item->menu_title)); ?>
+						<?php echo webtrees\Filter::escapeHtml(webtrees\I18N::translate($item->menu_title)); ?>
 					</td>
 					<td>
-						<?php echo Filter::escapeHtml(substr(I18N::translate($item->menu_address), 0, 1)=='<' ? I18N::translate($item->menu_address) : nl2br(I18N::translate($item->menu_address))); ?>
+						<?php echo webtrees\Filter::escapeHtml(substr(webtrees\I18N::translate($item->menu_address), 0, 1)=='<' ? webtrees\I18N::translate($item->menu_address) : nl2br(webtrees\I18N::translate($item->menu_address))); ?>
 					</td>
 					<td class="text-center">
 						<a href="module.php?mod=<?php echo $this->getName(); ?>&amp;mod_action=admin_edit&amp;block_id=<?php echo $item->block_id; ?>">
@@ -679,7 +693,7 @@ class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleCon
 					</td>
 					<td class="text-center">
 						<a href="module.php?mod=<?php echo $this->getName(); ?>&amp;mod_action=admin_delete&amp;block_id=<?php echo $item->block_id; ?>"
-							onclick="return confirm('<?php echo I18N::translate('Are you sure you want to delete this menu?'); ?>');">
+							onclick="return confirm('<?php echo webtrees\I18N::translate('Are you sure you want to delete this menu?'); ?>');">
 							<div class="icon-delete">&nbsp;</div>
 						</a>
 					</td>
@@ -692,7 +706,9 @@ class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleCon
 
 	// Return the list of menus
 	private function getMenuList() {
-		return Database::prepare(
+		global $WT_TREE;
+		
+		return webtrees\Database::prepare(
 			"SELECT block_id, bs1.setting_value AS menu_title, bs2.setting_value AS menu_access, bs3.setting_value AS menu_address".
 			" FROM `##block` b".
 			" JOIN `##block_setting` bs1 USING (block_id)".
@@ -704,8 +720,8 @@ class VytuxMenu2Module extends Module implements ModuleBlockInterface, ModuleCon
 			" AND bs3.setting_name='menu_address'".
 			" AND (gedcom_id IS NULL OR gedcom_id=?)".
 			" ORDER BY block_order"
-		)->execute(array($this->getName(), WT_GED_ID))->fetchAll();
+		)->execute(array($this->getName(), $WT_TREE->getTreeId()))->fetchAll();
 	}
 	
 }
-return new VytuxMenu2Module;
+return new VytuxMenu2MenuModule;
