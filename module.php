@@ -26,7 +26,7 @@ namespace Vytux\webtrees_vytux_menu2;
 //
 use Fisharebest\Webtrees as webtrees;
 
-class VytuxMenu2MenuModule extends webtrees\Module implements webtrees\ModuleBlockInterface, webtrees\ModuleConfigInterface, webtrees\ModuleMenuInterface {
+class VytuxMenu2MenuModule extends webtrees\AbstractModule implements webtrees\ModuleBlockInterface, webtrees\ModuleConfigInterface, webtrees\ModuleMenuInterface {
 
 	public function __construct() {
 		parent::__construct('vytux_menu2');
@@ -95,7 +95,7 @@ class VytuxMenu2MenuModule extends webtrees\Module implements webtrees\ModuleBlo
 		)->execute(array($this->getName()))->fetchOne();
 		
 		foreach ($menu_titles as $items) {
-			$languages = webtrees\get_block_setting($items->block_id, 'languages');
+			$languages = $this->getBlockSetting($items->block_id, 'languages');
 			if (in_array(WT_LOCALE, explode(',', $languages))) {
 				$lang = WT_LOCALE;
 			} else {
@@ -134,7 +134,7 @@ class VytuxMenu2MenuModule extends webtrees\Module implements webtrees\ModuleBlo
 		$menu->addClass('menuitem', 'menuitem_hover', '');
 		foreach ($menu_titles as $items) {
 			if (count($menu_titles)>1) {
-				$languages = webtrees\get_block_setting($items->block_id, 'languages');
+				$languages = $this->getBlockSetting($items->block_id, 'languages');
 				if ((!$languages || in_array(WT_LOCALE, explode(',', $languages))) && $items->menu_access >= webtrees\Auth::accessLevel($WT_TREE)) {
 					$submenu = new webtrees\Menu(webtrees\I18N::translate($items->menu_title), $items->menu_address, $this->getName() . '-' . str_replace(' ', '', $items->menu_title));
 					$menu->addSubmenu($submenu);
@@ -201,16 +201,18 @@ class VytuxMenu2MenuModule extends webtrees\Module implements webtrees\ModuleBlo
 				));
 				$block_id = webtrees\Database::getInstance()->lastInsertId();
 			}
-			webtrees\set_block_setting($block_id, 'menu_title',		webtrees\Filter::post('menu_title'));
-			webtrees\set_block_setting($block_id, 'menu_address',	webtrees\Filter::post('menu_address'));
-			webtrees\set_block_setting($block_id, 'menu_access',		webtrees\Filter::post('menu_access'));
+			$this->setBlockSetting($block_id, 'menu_title',		webtrees\Filter::post('menu_title'));
+			$this->setBlockSetting($block_id, 'menu_address',	webtrees\Filter::post('menu_address'));
+			$this->setBlockSetting($block_id, 'menu_access',		webtrees\Filter::post('menu_access'));
 			$languages = array();
-			foreach (webtrees\I18N::installedLanguages() as $code=>$name) {
+			foreach (webtrees\I18N::installedLocales() as $locale) {
+				$code = $locale->languageTag();
+				$name = $locale->endonym();
 				if (webtrees\Filter::postBool('lang_' . $code)) {
 					$languages[] = $code;
 				}
 			}
-			webtrees\set_block_setting($block_id, 'languages', implode(',', $languages));
+			$this->setBlockSetting($block_id, 'languages', implode(',', $languages));
 			$this->config();
 		} else {
 			$block_id = webtrees\Filter::get('block_id');
@@ -218,9 +220,9 @@ class VytuxMenu2MenuModule extends webtrees\Module implements webtrees\ModuleBlo
 			$controller->restrictAccess(webtrees\Auth::isEditor($WT_TREE));
 			if ($block_id) {
 				$controller->setPageTitle(webtrees\I18N::translate('Edit menu'));
-				$menu_title   = webtrees\get_block_setting($block_id, 'menu_title');
-				$menu_address = webtrees\get_block_setting($block_id, 'menu_address');
-				$menu_access  = webtrees\get_block_setting($block_id, 'menu_access');
+				$menu_title   = $this->getBlockSetting($block_id, 'menu_title');
+				$menu_address = $this->getBlockSetting($block_id, 'menu_address');
+				$menu_access  = $this->getBlockSetting($block_id, 'menu_access');
 				$block_order  = webtrees\Database::prepare(
 					"SELECT block_order FROM `##block` WHERE block_id=?"
 				)->execute(array($block_id))->fetchOne();
@@ -300,12 +302,14 @@ class VytuxMenu2MenuModule extends webtrees\Module implements webtrees\ModuleBlo
 					</label>
 					<div class="row col-sm-9">
 						<?php 
-							$accepted_languages=explode(',', webtrees\get_block_setting($block_id, 'languages'));
-							foreach (webtrees\I18N::installedLanguages() as $locale => $language) {
-								$checked = in_array($locale, $accepted_languages) ? 'checked' : ''; 
+							$accepted_languages=explode(',', $this->getBlockSetting($block_id, 'languages'));
+							foreach (webtrees\I18N::installedLocales() as $locale) {
+								$code = $locale->languageTag();
+								$name = $locale->endonym();
+								$checked = in_array($code, $accepted_languages) ? 'checked' : ''; 
 						?>
 								<div class="col-sm-3">
-									<label class="checkbox-inline "><input type="checkbox" name="lang_<?php echo $locale; ?>" <?php echo $checked; ?> ><?php echo $language; ?></label>
+									<label class="checkbox-inline "><input type="checkbox" name="lang_<?php echo $code; ?>" <?php echo $checked; ?> ><?php echo $name; ?></label>
 								</div>
 						<?php 
 							}
