@@ -1,41 +1,97 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: vytux_menu2\n"
-"POT-Creation-Date: 2013-07-01 19:02+1200\n"
-"PO-Revision-Date: 2015-04-05 01:28+0300\n"
-"Last-Translator: Vytautas <vytautas.krivickas@gmail.com>\n"
+"POT-Creation-Date: 2015-04-05 14:35+1000\n"
+"PO-Revision-Date: 2015-04-05 14:35+1000\n"
+"Last-Translator: Vytautas Krivickas <vytautas.krivickas@gmail.com>\n"
 "Language-Team: none\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%"
-"100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 2.3-dev\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Poedit 1.7.1\n"
 "X-Poedit-KeywordsList: translate;noop;plural:1,2\n"
-"X-Poedit-Basepath: ..\\..\n"
+"X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: help_text.php:33 module.php:384
-msgid "Add menu item"
-msgstr "Pridėti meniu"
-
-#: help_text.php:34
-msgid ""
-"The menu should contains menu items. Using this option you can add menu "
-"details."
+#: module.php:37
+msgid "Vytux Menu 2"
 msgstr ""
 
-#: help_text.php:38 module.php:265
+# Do not translate. Already in webtrees core.
+#: module.php:41
+msgid "Menu"
+msgstr ""
+
+#: module.php:46
+msgid "Provides links to custom defined pages."
+msgstr ""
+
+#: module.php:145
+msgid "Edit menus"
+msgstr ""
+
+#: module.php:222
+msgid "Edit menu"
+msgstr ""
+
+#: module.php:233
+msgid "Add menu"
+msgstr ""
+
+#: module.php:246 module.php:585
+msgid "Control panel"
+msgstr ""
+
+#: module.php:247 module.php:586
+msgid "Module administration"
+msgstr ""
+
+#: module.php:256
+msgid "General"
+msgstr ""
+
+# Do not translate. Already in webtrees core.
+#: module.php:260
+msgid "Title"
+msgstr ""
+
+#: module.php:274
+msgid "Add your menu title here"
+msgstr ""
+
+#: module.php:279 module.php:631
+msgid "Menu address"
+msgstr ""
+
+#: module.php:293
+msgid "Add your menu address here"
+msgstr ""
+
+#: module.php:297
+msgid "Languages"
+msgstr ""
+
+#: module.php:301
+msgid "Show this menu for which languages?"
+msgstr ""
+
+#: module.php:320
+msgid "Visibility and Access"
+msgstr ""
+
+#: module.php:324
 msgid "Menu position"
 msgstr "Meniu padėtis"
 
-#: help_text.php:39
+#: module.php:339
 msgid "This field controls the order in which the menu items are displayed."
 msgstr ""
 
-#: help_text.php:39
+#: module.php:341
 msgid ""
 "You do not have to enter the numbers sequentially. If you leave holes in the "
 "numbering scheme, you can insert other menu items later. For example, if you "
@@ -44,187 +100,72 @@ msgid ""
 "used to insert menu items in front of the first one."
 msgstr ""
 
-#: help_text.php:39 help_text.php:60 help_text.php:65
+#: module.php:343
 msgid ""
 "When more than one menu item has the same position number, only one of these "
 "menu items will be visible."
 msgstr ""
 
-#: help_text.php:43 module.php:267
+#: module.php:349
 msgid "Menu visibility"
 msgstr ""
 
-#: help_text.php:44
+#: module.php:352 module.php:641
+msgid "All"
+msgstr ""
+
+#: module.php:356
 msgid ""
 "You can determine whether this menu item will be visible regardless of "
 "family tree, or whether it will be visible only to the current family tree."
 msgstr ""
 
-#: help_text.php:45 module.php:397
-msgid "All"
-msgstr ""
-
-#: help_text.php:45
-msgid "The menu item will appear, regardless of family tree."
-msgstr ""
-
-#: help_text.php:45
-msgid "The menu item will appear only in the currently active family trees."
-msgstr ""
-
-#: help_text.php:49
-msgid "Delete menu"
-msgstr ""
-
-#: help_text.php:50
-msgid "This option will let you delete a menu item."
-msgstr ""
-
-#: help_text.php:54 module.php:222
-msgid "Edit menu"
-msgstr ""
-
-#: help_text.php:55
-msgid "This option will let you edit a menu item."
-msgstr ""
-
-#: help_text.php:59
-msgid "Move menu down"
-msgstr ""
-
-#: help_text.php:60
-msgid "This option will let you move a menu item downwards."
-msgstr ""
-
-#: help_text.php:60
-msgid ""
-"Each time you use this option, the position number of this menu item is "
-"increased by one. You can achieve the same effect by editing the menu item "
-"and changing the menu position field."
-msgstr ""
-
-#: help_text.php:64
-msgid "Move menu up"
-msgstr ""
-
-#: help_text.php:65
-msgid "This option will let you move a menu item upwards."
-msgstr ""
-
-#: help_text.php:65
-msgid ""
-"Each time you use this option, the position number of this menu item is "
-"reduced by one. You can achieve the same effect by editing the menu item and "
-"changing the menu position field."
-msgstr ""
-
-#: help_text.php:69 module.php:269
-msgid "Open menu in new tab or window"
-msgstr ""
-
-#: help_text.php:70
-msgid ""
-"Normally you would expect clicking on a menu item to open that page in the "
-"existing browser window or tab. But if you need it to open in a new window "
-"or tab you can tick this option."
-msgstr ""
-
 # Do not translate. Already in webtrees core.
-#. Do not translate. Already in webtrees core.
-#: module.php:36
-msgid "Menu"
-msgstr ""
-
-#: module.php:41
-msgid "Provides links to custom defined pages."
-msgstr ""
-
-#: module.php:148
-msgid "Edit menus"
-msgstr ""
-
-#: module.php:234
-msgid "Add menu"
-msgstr ""
-
-# Do not translate. Already in webtrees core.
-#. Do not translate. Already in webtrees core.
-#: module.php:259
-msgid "Title"
-msgstr ""
-
-#: module.php:260
-msgid "Add your menu title here"
-msgstr ""
-
-#: module.php:261
-msgid "Menu address"
-msgstr ""
-
-#: module.php:262
-msgid "Add your menu address here"
-msgstr ""
-
-# Do not translate. Already in webtrees core.
-#. Do not translate. Already in webtrees core.
-#: module.php:263
+#: module.php:362
 msgid "Access level"
 msgstr ""
 
-#: module.php:273
-msgid "Show this menu for which languages?"
+#: module.php:372
+msgid "save"
+msgstr ""
+
+#: module.php:376
+msgid "cancel"
 msgstr ""
 
 # Do not translate. Already in webtrees core.
-#. Do not translate. Already in webtrees core.
-#: module.php:278
-msgid "Save"
-msgstr ""
-
-# Do not translate. Already in webtrees core.
-#. Do not translate. Already in webtrees core.
-#: module.php:279
-msgid "Cancel"
-msgstr ""
-
-# Do not translate. Already in webtrees core.
-#. Do not translate. Already in webtrees core.
-#: module.php:377
+#: module.php:594
 msgid "Family tree"
 msgstr ""
 
 # Do not translate. Already in webtrees core.
-#. Do not translate. Already in webtrees core.
-#: module.php:381
+#: module.php:602
 msgid "show"
 msgstr ""
 
-#: module.php:389
-msgid "The menu is empty."
+#: module.php:611
+msgid "Add Menu"
 msgstr ""
 
-# Do not translate. Already in webtrees core.
-#. Do not translate. Already in webtrees core.
-#: module.php:395
-msgid "Position item"
+#: module.php:620
+msgid "ReadMe"
 msgstr ""
 
-# Do not translate. Already in webtrees core.
-#. Do not translate. Already in webtrees core.
-#: module.php:418
-msgid "Edit"
+#: module.php:629
+msgid "Position"
 msgstr ""
 
-#: module.php:421
-msgid "Are you sure you want to delete this menu item?"
+#: module.php:630
+msgid "Menu title"
 msgstr ""
 
-# Do not translate. Already in webtrees core.
-#. Do not translate. Already in webtrees core.
-#: module.php:421
-msgid "Delete"
+#: module.php:632
+msgid "Controls"
 msgstr ""
 
-#: module.php:57
-msgid "Vytux Menu 2"
+#: module.php:681
+msgid "Are you sure you want to delete this menu?"
 msgstr ""
+
+#~ msgid "Add menu item"
+#~ msgstr "Pridėti meniu"
