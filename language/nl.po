@@ -2,23 +2,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vytux_menu2\n"
 "POT-Creation-Date: 2015-04-05 14:34+1000\n"
-"PO-Revision-Date: 2015-04-05 18:38+1000\n"
-"Last-Translator: Vytautas Krivickas <vytautas.krivickas@gmail.com>\n"
+"PO-Revision-Date: 2015-04-06 15:19+0300\n"
+"Last-Translator: Vytautas <vytautas.krivickas@gmail.com>\n"
 "Language-Team: Vytux webtrees <webtrees@vytux.com>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.3-dev\n"
 "X-Poedit-KeywordsList: translate;noop;plural:1,2\n"
 "X-Poedit-Basepath: ..\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: module.php:37
 msgid "Vytux Menu 2"
-msgstr ""
+msgstr "Vytux Menu 2 - Test"
 
 # Do not translate. Already in webtrees core.
 #: module.php:41
@@ -91,18 +91,11 @@ msgid "This field controls the order in which the menu items are displayed."
 msgstr ""
 
 #: module.php:341
-msgid ""
-"You do not have to enter the numbers sequentially. If you leave holes in the "
-"numbering scheme, you can insert other menu items later. For example, if you "
-"use the numbers 1, 6, 11, 16, you can later insert menu items with the "
-"missing sequence numbers. Negative numbers and zero are allowed, and can be "
-"used to insert menu items in front of the first one."
+msgid "You do not have to enter the numbers sequentially. If you leave holes in the numbering scheme, you can insert other menu items later. For example, if you use the numbers 1, 6, 11, 16, you can later insert menu items with the missing sequence numbers. Negative numbers and zero are allowed, and can be used to insert menu items in front of the first one."
 msgstr ""
 
 #: module.php:343
-msgid ""
-"When more than one menu item has the same position number, only one of these "
-"menu items will be visible."
+msgid "When more than one menu item has the same position number, only one of these menu items will be visible."
 msgstr ""
 
 #: module.php:349
@@ -114,9 +107,7 @@ msgid "All"
 msgstr ""
 
 #: module.php:356
-msgid ""
-"You can determine whether this menu item will be visible regardless of "
-"family tree, or whether it will be visible only to the current family tree."
+msgid "You can determine whether this menu item will be visible regardless of family tree, or whether it will be visible only to the current family tree."
 msgstr ""
 
 # Do not translate. Already in webtrees core.
