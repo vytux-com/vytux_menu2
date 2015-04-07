@@ -41,14 +41,17 @@ msgstr "Rediger menu"
 msgid "Add menu"
 msgstr "Opret menu"
 
+# Do not translate. Already in webtrees core.
 #: module.php:246 module.php:585
 msgid "Control panel"
 msgstr ""
 
+# Do not translate. Already in webtrees core.
 #: module.php:247 module.php:586
 msgid "Module administration"
 msgstr ""
 
+# Do not translate. Already in webtrees core.
 #: module.php:256
 msgid "General"
 msgstr ""
@@ -70,6 +73,7 @@ msgstr "Link/Menu adresse"
 msgid "Add your menu address here"
 msgstr "Opret link/menu adresse"
 
+# Do not translate. Already in webtrees core.
 #: module.php:297
 msgid "Languages"
 msgstr ""
@@ -102,6 +106,7 @@ msgstr "Hvis flere menu punkter har samme placeringsnummer, kun een af disse vil
 msgid "Menu visibility"
 msgstr "Synlighed"
 
+# Do not translate. Already in webtrees core.
 #: module.php:352 module.php:641
 msgid "All"
 msgstr "Alle"
@@ -115,6 +120,7 @@ msgstr "Synlighed kun for det aktuelle træ eller flere."
 msgid "Access level"
 msgstr ""
 
+# Do not translate. Already in webtrees core.
 #: module.php:372
 msgid "save"
 msgstr ""
