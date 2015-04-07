@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vytux_menu2\n"
 "POT-Creation-Date: 2015-04-05 14:35+1000\n"
-"PO-Revision-Date: 2015-04-07 00:57+0300\n"
+"PO-Revision-Date: 2015-04-07 10:45+0300\n"
 "Last-Translator: Vytautas <vytautas.krivickas@gmail.com>\n"
 "Language-Team: none\n"
 "Language: lt\n"
@@ -31,15 +31,15 @@ msgstr ""
 
 #: module.php:145
 msgid "Edit menus"
-msgstr ""
+msgstr "Redaguoti menius"
 
 #: module.php:222
 msgid "Edit menu"
-msgstr ""
+msgstr "Redaguoti meniu"
 
 #: module.php:233
 msgid "Add menu"
-msgstr ""
+msgstr "Pridėti meniu"
 
 # Do not translate. Already in webtrees core.
 #: module.php:246 module.php:585
@@ -63,15 +63,15 @@ msgstr ""
 
 #: module.php:274
 msgid "Add your menu title here"
-msgstr ""
+msgstr "Pridėti meniu titulą čia"
 
 #: module.php:279 module.php:631
 msgid "Menu address"
-msgstr ""
+msgstr "Meniu adresas"
 
 #: module.php:293
 msgid "Add your menu address here"
-msgstr ""
+msgstr "Pridėti meniu adresą čia"
 
 # Do not translate. Already in webtrees core.
 #: module.php:297
@@ -84,11 +84,11 @@ msgstr ""
 
 #: module.php:320
 msgid "Visibility and Access"
-msgstr ""
+msgstr "Meniu matomumas"
 
 #: module.php:324
 msgid "Menu position"
-msgstr ""
+msgstr "Meniu padėtis"
 
 #: module.php:339
 msgid "This field controls the order in which the menu items are displayed."
@@ -104,7 +104,7 @@ msgstr ""
 
 #: module.php:349
 msgid "Menu visibility"
-msgstr ""
+msgstr "Meniu matomumas"
 
 # Do not translate. Already in webtrees core.
 #: module.php:352 module.php:641
@@ -141,27 +141,27 @@ msgstr ""
 
 #: module.php:611
 msgid "Add Menu"
-msgstr ""
+msgstr "Pridėti meniu"
 
 #: module.php:620
 msgid "ReadMe"
-msgstr ""
+msgstr "Skaityk Mane"
 
 #: module.php:629
 msgid "Position"
-msgstr ""
+msgstr "Matomumo tvarka"
 
 #: module.php:630
 msgid "Menu title"
-msgstr ""
+msgstr "Meniu titulas"
 
 #: module.php:632
 msgid "Controls"
-msgstr ""
+msgstr "Valdymas"
 
 #: module.php:681
 msgid "Are you sure you want to delete this menu?"
-msgstr ""
+msgstr "Ar tikrai ištrinti šį meniu?"
 
 #~ msgid "Add menu item"
 #~ msgstr "Pridėti meniu"
