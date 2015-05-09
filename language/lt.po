@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vytux_menu2\n"
 "POT-Creation-Date: 2015-04-05 14:35+1000\n"
-"PO-Revision-Date: 2015-04-07 10:45+0300\n"
+"PO-Revision-Date: 2015-05-09 13:23+0300\n"
 "Last-Translator: Vytautas <vytautas.krivickas@gmail.com>\n"
 "Language-Team: none\n"
 "Language: lt\n"
@@ -18,11 +18,11 @@ msgstr ""
 
 #: module.php:37
 msgid "Vytux Menu 2"
-msgstr ""
+msgstr "Vytux Menu 2"
 
 #: module.php:46
 msgid "Provides links to custom defined pages."
-msgstr ""
+msgstr "Pateikiamos nuorodos į pasirinktus puslapius."
 
 #: module.php:145
 msgid "Edit menus"
@@ -50,7 +50,7 @@ msgstr "Pridėti meniu adresą čia"
 
 #: module.php:301
 msgid "Show this menu for which languages?"
-msgstr ""
+msgstr "Kuriom kalbom rodyti šį menių?"
 
 #: module.php:320
 msgid "Visibility and Access"
@@ -62,7 +62,7 @@ msgstr "Meniu padėtis"
 
 #: module.php:339
 msgid "This field controls the order in which the menu items are displayed."
-msgstr ""
+msgstr "Ši sritis kontroliuoja menių rodymo tvarką."
 
 #: module.php:341
 msgid "You do not have to enter the numbers sequentially. If you leave holes in the numbering scheme, you can insert other menu items later. For example, if you use the numbers 1, 6, 11, 16, you can later insert menu items with the missing sequence numbers. Negative numbers and zero are allowed, and can be used to insert menu items in front of the first one."
@@ -82,7 +82,7 @@ msgstr ""
 
 #: module.php:376
 msgid "cancel"
-msgstr ""
+msgstr "atšaukti"
 
 #: module.php:611
 msgid "Add Menu"
