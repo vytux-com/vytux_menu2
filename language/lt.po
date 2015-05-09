@@ -20,11 +20,6 @@ msgstr ""
 msgid "Vytux Menu 2"
 msgstr ""
 
-# Do not translate. Already in webtrees core.
-#: module.php:41
-msgid "Menu"
-msgstr ""
-
 #: module.php:46
 msgid "Provides links to custom defined pages."
 msgstr ""
@@ -41,26 +36,6 @@ msgstr "Redaguoti meniu"
 msgid "Add menu"
 msgstr "Pridėti meniu"
 
-# Do not translate. Already in webtrees core.
-#: module.php:246 module.php:585
-msgid "Control panel"
-msgstr ""
-
-# Do not translate. Already in webtrees core.
-#: module.php:247 module.php:586
-msgid "Module administration"
-msgstr ""
-
-# Do not translate. Already in webtrees core.
-#: module.php:256
-msgid "General"
-msgstr ""
-
-# Do not translate. Already in webtrees core.
-#: module.php:260
-msgid "Title"
-msgstr ""
-
 #: module.php:274
 msgid "Add your menu title here"
 msgstr "Pridėti meniu titulą čia"
@@ -72,11 +47,6 @@ msgstr "Meniu adresas"
 #: module.php:293
 msgid "Add your menu address here"
 msgstr "Pridėti meniu adresą čia"
-
-# Do not translate. Already in webtrees core.
-#: module.php:297
-msgid "Languages"
-msgstr ""
 
 #: module.php:301
 msgid "Show this menu for which languages?"
@@ -106,37 +76,12 @@ msgstr ""
 msgid "Menu visibility"
 msgstr "Meniu matomumas"
 
-# Do not translate. Already in webtrees core.
-#: module.php:352 module.php:641
-msgid "All"
-msgstr ""
-
 #: module.php:356
 msgid "You can determine whether this menu item will be visible regardless of family tree, or whether it will be visible only to the current family tree."
 msgstr ""
 
-# Do not translate. Already in webtrees core.
-#: module.php:362
-msgid "Access level"
-msgstr ""
-
-# Do not translate. Already in webtrees core.
-#: module.php:372
-msgid "save"
-msgstr ""
-
 #: module.php:376
 msgid "cancel"
-msgstr ""
-
-# Do not translate. Already in webtrees core.
-#: module.php:594
-msgid "Family tree"
-msgstr ""
-
-# Do not translate. Already in webtrees core.
-#: module.php:602
-msgid "show"
 msgstr ""
 
 #: module.php:611
