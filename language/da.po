@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vytux_menu2\n"
 "POT-Creation-Date: 2015-04-05 14:35+1000\n"
-"PO-Revision-Date: 2015-04-07 10:23+0300\n"
-"Last-Translator: Vytautas <vytautas.krivickas@gmail.com>\n"
+"PO-Revision-Date: 2015-05-29 10:29+0300\n"
+"Last-Translator: Vytautas Krivickas <vytautas.krivickas@gmail.com>\n"
 "Language-Team: Vytux webtrees <webtrees@vytux.com>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
@@ -54,7 +54,7 @@ msgstr "Vælg sprog?"
 
 #: module.php:320
 msgid "Visibility and Access"
-msgstr ""
+msgstr "Synlighed og Adgang"
 
 #: module.php:324
 msgid "Menu position"
@@ -82,7 +82,7 @@ msgstr "Synlighed kun for det aktuelle træ eller flere."
 
 #: module.php:376
 msgid "cancel"
-msgstr ""
+msgstr "fortryd"
 
 #: module.php:611
 msgid "Add Menu"
@@ -90,11 +90,11 @@ msgstr ""
 
 #: module.php:620
 msgid "ReadMe"
-msgstr ""
+msgstr "LæsMig"
 
 #: module.php:629
 msgid "Position"
-msgstr ""
+msgstr "Position"
 
 #: module.php:630
 msgid "Menu title"
@@ -102,7 +102,7 @@ msgstr ""
 
 #: module.php:632
 msgid "Controls"
-msgstr ""
+msgstr "Kontroller"
 
 #: module.php:681
 msgid "Are you sure you want to delete this menu?"
