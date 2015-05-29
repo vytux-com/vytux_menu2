@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vytux_menu2\n"
 "POT-Creation-Date: 2015-04-05 14:34+1000\n"
-"PO-Revision-Date: 2015-05-24 11:30+0300\n"
+"PO-Revision-Date: 2015-05-29 11:30+0300\n"
 "Last-Translator: R. <gustine@laposte.net>\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -22,7 +22,7 @@ msgstr "Vytux Menu 2"
 
 #: module.php:46
 msgid "Provides links to custom defined pages."
-msgstr "Fournit des liens vers des pages personnalisées."
+msgstr "Menu supplémentaire avec des liens vers des pages personnalisées existantes."
 
 #: module.php:145
 msgid "Edit menus"
