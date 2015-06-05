@@ -26,7 +26,7 @@ namespace Vytux\webtrees_vytux_menu2;
 //
 use Fisharebest\Webtrees as webtrees;
 
-class VytuxMenu2MenuModule extends webtrees\AbstractModule implements webtrees\ModuleBlockInterface, webtrees\ModuleConfigInterface, webtrees\ModuleMenuInterface {
+class VytuxMenu2MenuModule extends webtrees\Module\AbstractModule implements webtrees\Module\ModuleBlockInterface, webtrees\Module\ModuleConfigInterface, webtrees\Module\ModuleMenuInterface {
 
 	public function __construct() {
 		parent::__construct('vytux_menu2');
@@ -214,7 +214,7 @@ class VytuxMenu2MenuModule extends webtrees\AbstractModule implements webtrees\M
 			$this->config();
 		} else {
 			$block_id = webtrees\Filter::get('block_id');
-			$controller = new webtrees\PageController();
+			$controller = new webtrees\Controller\PageController();
 			$controller->restrictAccess(webtrees\Auth::isEditor($WT_TREE));
 			if ($block_id) {
 				$controller->setPageTitle(webtrees\I18N::translate('Edit menu'));
@@ -346,7 +346,7 @@ class VytuxMenu2MenuModule extends webtrees\AbstractModule implements webtrees\M
 						<?php echo webtrees\I18N::translate('Menu visibility'); ?>
 					</label>
 					<div class="col-sm-9">
-						<?php echo webtrees\select_edit_control('gedcom_id', webtrees\Tree::getIdList(), webtrees\I18N::translate('All'), $WT_TREE->getTreeId(), 'class="form-control"'); ?>
+						<?php echo select_edit_control('gedcom_id', webtrees\Tree::getIdList(), webtrees\I18N::translate('All'), $WT_TREE->getTreeId(), 'class="form-control"'); ?>
 					</div>
 					<span class="help-block col-sm-9 col-sm-offset-3 small text-muted">
 						<?php 
@@ -359,7 +359,7 @@ class VytuxMenu2MenuModule extends webtrees\AbstractModule implements webtrees\M
 						<?php echo webtrees\I18N::translate('Access level'); ?>
 					</label>
 					<div class="col-sm-9">
-						<?php echo webtrees\edit_field_access_level('menu_access', $menu_access, 'class="form-control"'); ?>
+						<?php echo edit_field_access_level('menu_access', $menu_access, 'class="form-control"'); ?>
 					</div>
 				</div>
 				
@@ -463,7 +463,7 @@ class VytuxMenu2MenuModule extends webtrees\AbstractModule implements webtrees\M
 
 	private function config() {
 		global $WT_TREE;
-		$controller = new webtrees\PageController();
+		$controller = new webtrees\Controller\PageController();
 		$controller
 			->restrictAccess(webtrees\Auth::isManager($WT_TREE))
 			->setPageTitle($this->getTitle())
@@ -593,7 +593,7 @@ class VytuxMenu2MenuModule extends webtrees\AbstractModule implements webtrees\M
 					<input type="hidden" name="mod" value="<?php echo  $this->getName(); ?>">
 					<input type="hidden" name="mod_action" value="admin_config">
 					<div class="col-sm-9 col-xs-9" style="padding:0;">
-						<?php echo webtrees\select_edit_control('ged', webtrees\Tree::getNameList(), null, $WT_TREE->getName(), 'class="form-control"'); ?>
+						<?php echo select_edit_control('ged', webtrees\Tree::getNameList(), null, $WT_TREE->getName(), 'class="form-control"'); ?>
 					</div>
 					<div class="col-sm-3" style="padding:0;">
 						<input type="submit" class="btn btn-primary" value="<?php echo webtrees\I18N::translate('show'); ?>">
