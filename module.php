@@ -346,7 +346,7 @@ class VytuxMenu2MenuModule extends webtrees\Module\AbstractModule implements web
 						<?php echo webtrees\I18N::translate('Menu visibility'); ?>
 					</label>
 					<div class="col-sm-9">
-						<?php echo select_edit_control('gedcom_id', webtrees\Tree::getIdList(), webtrees\I18N::translate('All'), $WT_TREE->getTreeId(), 'class="form-control"'); ?>
+						<?php echo webtrees\Functions\FunctionsEdit::selectEditControl('gedcom_id', webtrees\Tree::getIdList(), webtrees\I18N::translate('All'), $WT_TREE->getTreeId(), 'class="form-control"'); ?>
 					</div>
 					<span class="help-block col-sm-9 col-sm-offset-3 small text-muted">
 						<?php 
@@ -359,7 +359,7 @@ class VytuxMenu2MenuModule extends webtrees\Module\AbstractModule implements web
 						<?php echo webtrees\I18N::translate('Access level'); ?>
 					</label>
 					<div class="col-sm-9">
-						<?php echo edit_field_access_level('menu_access', $menu_access, 'class="form-control"'); ?>
+						<?php echo webtrees\Functions\FunctionsEdit::editFieldAccessLevel('menu_access', $menu_access, 'class="form-control"'); ?>
 					</div>
 				</div>
 				
@@ -593,7 +593,7 @@ class VytuxMenu2MenuModule extends webtrees\Module\AbstractModule implements web
 					<input type="hidden" name="mod" value="<?php echo  $this->getName(); ?>">
 					<input type="hidden" name="mod_action" value="admin_config">
 					<div class="col-sm-9 col-xs-9" style="padding:0;">
-						<?php echo select_edit_control('ged', webtrees\Tree::getNameList(), null, $WT_TREE->getName(), 'class="form-control"'); ?>
+						<?php echo webtrees\Functions\FunctionsEdit::selectEditControl('ged', webtrees\Tree::getNameList(), null, $WT_TREE->getName(), 'class="form-control"'); ?>
 					</div>
 					<div class="col-sm-3" style="padding:0;">
 						<input type="submit" class="btn btn-primary" value="<?php echo webtrees\I18N::translate('show'); ?>">
