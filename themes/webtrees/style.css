@@ -26,6 +26,11 @@
 	background-size:64px; /*precautionary, in case icons are not the right size;*/
 }
 
+/* Mobile low resolution viewport */
+@media (max-width: 600px) {
+	li.vytux_menu2 {background:url(menu-mobile.png) no-repeat 50% 50%}
+}
+
 /* sub-menu icon for "Edit menus" item. This is always required */
 .primary-menu li.vytux_menu2 ul li.vytux_menu2-edit {
 	background:url(menu-edit.png) no-repeat left 0;
