@@ -130,7 +130,7 @@ class VytuxMenu2MenuModule extends webtrees\Module\AbstractModule implements web
 		}
 
 		//-- main menu item
-		$menu = new webtrees\Menu($main_menu_title, $main_menu_address, $this->getName(), 'down');
+		$menu = new webtrees\Menu($main_menu_title, $main_menu_address, $this->getName());
 		$menu->addClass('menuitem', 'menuitem_hover', '');
 		foreach ($menu_titles as $items) {
 			if (count($menu_titles)>1) {
