@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vytux_menu2\n"
 "POT-Creation-Date: 2015-04-05 14:34+1000\n"
-"PO-Revision-Date: 2015-04-05 14:34+1000\n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2015-07-11 22:50+0300\n"
+"Last-Translator: Max Musterman <news@zacherweb.de>\n"
 "Language-Team: none\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 2.3-dev\n"
 "X-Poedit-KeywordsList: translate;noop;plural:1,2\n"
 "X-Poedit-Basepath: ..\n"
@@ -18,27 +18,27 @@ msgstr ""
 
 #: module.php:37
 msgid "Vytux Menu 2"
-msgstr "Vytux Menu 2"
+msgstr "Vytux Menü 2"
 
 #: module.php:46
 msgid "Provides links to custom defined pages."
-msgstr "Provides links to custom defined pages."
+msgstr "Verfügbare Links zu speziell definierten Seiten."
 
 #: module.php:145
 msgid "Edit menus"
-msgstr "Edit menus"
+msgstr "Menüs bearbeiten"
 
 #: module.php:222
 msgid "Edit menu"
-msgstr "Edit menu"
+msgstr "Menü bearbeiten"
 
 #: module.php:233
 msgid "Add menu"
-msgstr "Add menu"
+msgstr "Menü hinzufügen"
 
 #: module.php:274
 msgid "Add your menu title here"
-msgstr "Add your menu title here"
+msgstr "Gibt deinen Menü Namen hier ein"
 
 #: module.php:279 module.php:631
 msgid "Menu address"
@@ -46,15 +46,15 @@ msgstr "Menu address"
 
 #: module.php:293
 msgid "Add your menu address here"
-msgstr "Add your menu address here"
+msgstr "Gib die Adresse deines Menüs hier ein"
 
 #: module.php:301
 msgid "Show this menu for which languages?"
-msgstr "Show this menu for which languages?"
+msgstr "Für welche Sprachen soll das Menü angezeigt werden?"
 
 #: module.php:320
 msgid "Visibility and Access"
-msgstr "Visibility and Access"
+msgstr "Sichtbarkeit und Zugriff"
 
 #: module.php:324
 msgid "Menu position"
@@ -62,7 +62,7 @@ msgstr "Menu position"
 
 #: module.php:339
 msgid "This field controls the order in which the menu items are displayed."
-msgstr "This field controls the order in which the menu items are displayed."
+msgstr "Dieses Feld definiert die Reihenfolge in der die Menüeinträge dargestellt werden."
 
 #: module.php:341
 msgid "You do not have to enter the numbers sequentially. If you leave holes in the numbering scheme, you can insert other menu items later. For example, if you use the numbers 1, 6, 11, 16, you can later insert menu items with the missing sequence numbers. Negative numbers and zero are allowed, and can be used to insert menu items in front of the first one."
@@ -74,7 +74,7 @@ msgstr "When more than one menu item has the same position number, only one of t
 
 #: module.php:349
 msgid "Menu visibility"
-msgstr "Menu visibility"
+msgstr "Menü Sichtbarkeit"
 
 #: module.php:356
 msgid "You can determine whether this menu item will be visible regardless of family tree, or whether it will be visible only to the current family tree."
