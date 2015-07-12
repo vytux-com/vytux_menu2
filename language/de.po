@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vytux_menu2\n"
 "POT-Creation-Date: 2015-04-05 14:34+1000\n"
-"PO-Revision-Date: 2015-07-12 14:27+0300\n"
+"PO-Revision-Date: 2015-07-12 14:34+0300\n"
 "Last-Translator: Max Musterman <news@zacherweb.de>\n"
 "Language-Team: none\n"
 "Language: de\n"
@@ -90,7 +90,7 @@ msgstr "Menü hinzufügen"
 
 #: module.php:620
 msgid "ReadMe"
-msgstr "Ließ Mich"
+msgstr "Ließ mich"
 
 #: module.php:629
 msgid "Position"
