@@ -205,7 +205,7 @@ class VytuxMenu2MenuModule extends webtrees\Module\AbstractModule implements web
 			$this->setBlockSetting($block_id, 'menu_address',	webtrees\Filter::post('menu_address'));
 			$this->setBlockSetting($block_id, 'menu_access',		webtrees\Filter::post('menu_access'));
 			$languages = array();
-			foreach (webtrees\I18N::installedLocales() as $locale) {
+			foreach (webtrees\I18N::activeLocales() as $locale) {
 				if (webtrees\Filter::postBool('lang_' . $locale->languageTag())) {
 					$languages[] = $locale->languageTag();
 				}
@@ -301,7 +301,7 @@ class VytuxMenu2MenuModule extends webtrees\Module\AbstractModule implements web
 					<div class="col-sm-9">
 						<?php 
 							$accepted_languages=explode(',', $this->getBlockSetting($block_id, 'languages'));
-							foreach (webtrees\I18N::installedLocales() as $locale) {
+							foreach (webtrees\I18N::activeLocales() as $locale) {
 						?>
 								<div class="checkbox">
 									<label title="<?php echo $locale->languageTag(); ?>">
