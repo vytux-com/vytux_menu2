@@ -111,14 +111,6 @@ class VytuxMenu2MenuModule extends webtrees\Module\AbstractModule implements web
 			"SELECT setting_value FROM `##block_setting` WHERE block_id=? AND setting_name=?"
 		)->execute(array($default_block, 'menu_address'))->fetchOne();
 		
-		if (count($menu_titles)>1) {
-			$main_menu_title = $this->getMenuTitle();
-		} else {
-			$main_menu_title = webtrees\Database::prepare(
-				"SELECT setting_value FROM `##block_setting` WHERE block_id=? AND setting_name=?"
-			)->execute(array($default_block, 'menu_title'))->fetchOne();
-		}
-		
 		if (webtrees\Auth::isSearchEngine()) {
 			return null;
 		}
@@ -130,21 +122,21 @@ class VytuxMenu2MenuModule extends webtrees\Module\AbstractModule implements web
 		}
 
 		//-- main menu item
-		$menu = new webtrees\Menu($main_menu_title, $main_menu_address, $this->getName());
+		$menu = new webtrees\Menu($this->getMenuTitle(), $main_menu_address, $this->getName());
 		$menu->addClass('menuitem', 'menuitem_hover', '');
 		foreach ($menu_titles as $items) {
-			if (count($menu_titles)>1) {
-				$languages = $this->getBlockSetting($items->block_id, 'languages');
-				if ((!$languages || in_array(WT_LOCALE, explode(',', $languages))) && $items->menu_access >= webtrees\Auth::accessLevel($WT_TREE)) {
-					$submenu = new webtrees\Menu(webtrees\I18N::translate($items->menu_title), $items->menu_address, $this->getName() . '-' . str_replace(' ', '', $items->menu_title));
-					$menu->addSubmenu($submenu);
-				}
+			$languages = $this->getBlockSetting($items->block_id, 'languages');
+			if ((!$languages || in_array(WT_LOCALE, explode(',', $languages))) && $items->menu_access >= webtrees\Auth::accessLevel($WT_TREE)) {
+				$submenu = new webtrees\Menu(webtrees\I18N::translate($items->menu_title), $items->menu_address, $this->getName() . '-' . str_replace(' ', '', $items->menu_title));
+				$menu->addSubmenu($submenu);
 			}
 		}
+
 		if (webtrees\Auth::isAdmin()) {
 			$submenu = new webtrees\Menu(webtrees\I18N::translate('Edit menus'), $this->getConfigLink(), $this->getName() . '-edit');
 			$menu->addSubmenu($submenu);
 		}
+		
 		return $menu;
 	}
 
