@@ -97,6 +97,7 @@ Things that are **not** carried over:
 
 - Icons and CSS you added to the old `themes/<theme>/` folders. Upload the icons again in the control panel, and paste CSS changes into **Custom CSS**. The old per-item classes (e.g. `vytux_menu2-MyTitle`) are now `menu-vytux_menu2-item-<id>`.
 - Addresses that point to webtrees 1.x pages, such as `module.php?mod=…` or `individual.php?pid=…`, need updating to their webtrees 2 equivalents.
+- Items whose address starts with `javascript:`, `data:` or `vbscript:` are not shown in the menu until their address is changed.
 - Code changes to the menu title. Use the **Menu label** setting instead.
 
 ## Development

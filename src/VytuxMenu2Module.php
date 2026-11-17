@@ -175,7 +175,8 @@ class VytuxMenu2Module extends AbstractModule implements ModuleCustomInterface, 
         $menu = new Menu($label, '#', self::CSS_CLASS);
 
         foreach ($this->repository()->items($tree->id()) as $item) {
-            if ($item->isVisibleTo($language, $access_level)) {
+            // Also check here, as items migrated from webtrees 1.x were never validated.
+            if ($item->isVisibleTo($language, $access_level) && MenuItem::isSafeUrl($item->url)) {
                 $menu->addSubmenu(new Menu(
                     e(self::translateTitle($item->title)),
                     $item->url,
