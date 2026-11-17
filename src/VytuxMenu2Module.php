@@ -84,7 +84,7 @@ class VytuxMenu2Module extends AbstractModule implements ModuleCustomInterface, 
     use ModuleGlobalTrait;
     use ModuleMenuTrait;
 
-    public const string CUSTOM_VERSION = '2.0.0';
+    public const string CUSTOM_VERSION = '2.2.0';
 
     // CSS class of the top-level menu.  Items use "<class>-item", "<class>-item-<id>" and "<class>-edit".
     public const string CSS_CLASS = 'menu-vytux_menu2';
