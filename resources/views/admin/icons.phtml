@@ -1,0 +1,38 @@
+<?php
+
+declare(strict_types=1);
+
+use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
+use Fisharebest\Webtrees\Http\RequestHandlers\ModulesAllPage;
+use Fisharebest\Webtrees\I18N;
+use Vytux\WebtreesModules\VytuxMenu2\IconSet;
+use Vytux\WebtreesModules\VytuxMenu2\VytuxMenu2Module;
+
+/**
+ * @var IconSet              $icons
+ * @var VytuxMenu2Module     $module
+ * @var string               $target
+ * @var array<string,string> $themes
+ * @var string               $title
+ */
+
+?>
+
+<?= view('components/breadcrumbs', ['links' => [route(ControlPanel::class) => I18N::translate('Control panel'), route(ModulesAllPage::class) => I18N::translate('Modules'), $module->getConfigLink() => $module->title(), $title]]) ?>
+
+<h1><?= $title ?></h1>
+
+<form method="post" enctype="multipart/form-data" action="<?= e(route('module', ['module' => $module->name(), 'action' => 'AdminIcons', 'target' => $target])) ?>">
+    <?= view($module->name() . '::admin/icon-fields', ['icons' => $icons, 'module' => $module, 'target' => $target, 'themes' => $themes]) ?>
+
+    <button type="submit" class="btn btn-primary">
+        <?= view('icons/save') ?>
+        <?= I18N::translate('save') ?>
+    </button>
+    <a href="<?= e($module->getConfigLink()) ?>" class="btn btn-secondary">
+        <?= view('icons/cancel') ?>
+        <?= I18N::translate('cancel') ?>
+    </a>
+
+    <?= csrf_field() ?>
+</form>

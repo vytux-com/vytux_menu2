@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['8.3', '8.4', '8.5', '8.6']
+    steps:
+      - uses: actions/checkout@v5
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+      - run: composer validate --strict
+      - run: for file in module.php src/*.php resources/views/admin/*.phtml; do php -l "$file" || exit 1; done
+      # The module installer plugin declares php 8.3 - 8.5 only, which blocks the 8.6 dev job.
+      - run: composer install --no-interaction --no-progress --ignore-platform-req=php
+      - run: composer test
