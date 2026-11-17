@@ -37,4 +37,15 @@ final class MenuItemTest extends TestCase
         self::assertTrue($lithuanian->isVisibleTo('en-GB', self::PRIV_PRIVATE));
         self::assertFalse($lithuanian->isVisibleTo('en-US', self::PRIV_PRIVATE));
     }
+
+    public function testSafeUrls(): void
+    {
+        self::assertTrue(MenuItem::isSafeUrl('https://example.com/?a=1'));
+        self::assertTrue(MenuItem::isSafeUrl('index.php?route=/tree/demo'));
+        self::assertFalse(MenuItem::isSafeUrl(' JavaScript:alert(1)'));
+        self::assertFalse(MenuItem::isSafeUrl("java\tscript:alert(1)"));
+        self::assertFalse(MenuItem::isSafeUrl("java\nscript:alert(1)"));
+        self::assertFalse(MenuItem::isSafeUrl("\x01javascript:alert(1)"));
+        self::assertFalse(MenuItem::isSafeUrl('data:text/html,x'));
+    }
 }

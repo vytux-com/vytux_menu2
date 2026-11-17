@@ -105,14 +105,14 @@ $last_id       = $items === [] ? null : $items[array_key_last($items)]->id;
                 </td>
                 <td>
                     <?php if ($item->id !== $first_id) : ?>
-                        <a href="#" data-wt-post-url="<?= e(route('module', ['module' => $module->name(), 'action' => 'AdminMoveUp', 'block_id' => $item->id])) ?>" aria-label="<?= I18N::translate('Move up') ?>" class="btn btn-secondary">
+                        <a href="#" data-wt-post-url="<?= e(route('module', ['module' => $module->name(), 'action' => 'AdminMoveUp', 'block_id' => $item->id, 'tree_id' => $tree?->id() ?? 0])) ?>" aria-label="<?= I18N::translate('Move up') ?>" class="btn btn-secondary">
                             <?= view('icons/arrow-up') ?>
                         </a>
                     <?php endif ?>
                 </td>
                 <td>
                     <?php if ($item->id !== $last_id) : ?>
-                        <a href="#" data-wt-post-url="<?= e(route('module', ['module' => $module->name(), 'action' => 'AdminMoveDown', 'block_id' => $item->id])) ?>" aria-label="<?= I18N::translate('Move down') ?>" class="btn btn-secondary">
+                        <a href="#" data-wt-post-url="<?= e(route('module', ['module' => $module->name(), 'action' => 'AdminMoveDown', 'block_id' => $item->id, 'tree_id' => $tree?->id() ?? 0])) ?>" aria-label="<?= I18N::translate('Move down') ?>" class="btn btn-secondary">
                             <?= view('icons/arrow-down') ?>
                         </a>
                     <?php endif ?>

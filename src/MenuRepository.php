@@ -8,6 +8,8 @@ use Fisharebest\Webtrees\DB;
 use Illuminate\Database\Query\Builder;
 
 use function array_filter;
+use function array_map;
+use function array_search;
 use function array_values;
 use function explode;
 use function implode;
@@ -136,28 +138,62 @@ final class MenuRepository
     }
 
     /**
-     * Swap an item with the previous (-1) or next (+1) item.
+     * Swap an item with the previous (-1) or next (+1) item shown in the admin list for a tree.
+     *
+     * @param int|null $tree_id The tree selected in the admin page, or null for all items.
      */
-    public function move(int $id, int $direction): void
+    public function move(int $id, int $direction, int|null $tree_id = null): void
     {
-        $items = $this->items(null);
+        $all     = $this->items(null);
+        $visible = $tree_id === null ? $all : $this->items($tree_id);
+        $orders  = self::reorder($all, array_map(static fn (MenuItem $item): int => $item->id, $visible), $id, $direction);
 
-        foreach ($items as $index => $item) {
-            if ($item->id === $id) {
-                $other = $items[$index + $direction] ?? null;
+        foreach ($orders as $block_id => $order) {
+            DB::table('block')->where('block_id', '=', $block_id)->update(['block_order' => $order]);
+        }
+    }
 
-                if ($other instanceof MenuItem) {
-                    // Items with the same position would not swap, so renumber them.
-                    $order       = $item->order;
-                    $other_order = $other->order === $order ? $order + $direction : $other->order;
+    /**
+     * Swap an item with its visible neighbour, then give every item a distinct position, so that
+     * items sharing a position (e.g. from webtrees 1.x) move exactly one place.
+     *
+     * @param list<MenuItem> $all         All items, sorted by position.
+     * @param list<int>      $visible_ids IDs of the items shown in the admin list, in the same order.
+     *
+     * @return array<int,int> New positions of the items that changed, keyed by item ID.
+     */
+    public static function reorder(array $all, array $visible_ids, int $id, int $direction): array
+    {
+        $visible_index = array_search($id, $visible_ids, true);
 
-                    DB::table('block')->where('block_id', '=', $item->id)->update(['block_order' => $other_order]);
-                    DB::table('block')->where('block_id', '=', $other->id)->update(['block_order' => $order]);
-                }
+        if ($visible_index === false || !isset($visible_ids[$visible_index + $direction])) {
+            return [];
+        }
 
-                return;
+        $other_id = $visible_ids[$visible_index + $direction];
+        $ids      = array_map(static fn (MenuItem $item): int => $item->id, $all);
+        $index    = array_search($id, $ids, true);
+        $other    = array_search($other_id, $ids, true);
+
+        if ($index === false || $other === false) {
+            return [];
+        }
+
+        [$ids[$index], $ids[$other]] = [$ids[$other], $ids[$index]];
+
+        $old_orders = [];
+        foreach ($all as $item) {
+            $old_orders[$item->id] = $item->order;
+        }
+
+        $changes = [];
+        foreach ($ids as $position => $item_id) {
+            if ($old_orders[$item_id] !== $position + 1) {
+                $changes[$item_id] = $position + 1;
             }
         }
+
+        return $changes;
     }
 
     /**

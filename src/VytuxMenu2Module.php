@@ -344,7 +344,7 @@ class VytuxMenu2Module extends AbstractModule implements ModuleCustomInterface, 
         $url       = trim($params->string('menu_address', ''));
         $languages = array_values(array_filter($params->array('languages'), is_string(...)));
 
-        if (preg_match('/^\s*(javascript|data|vbscript):/i', $url) === 1) {
+        if (!MenuItem::isSafeUrl($url)) {
             FlashMessages::addMessage(I18N::translate('This menu address is not allowed.'), 'danger');
 
             return redirect(route('module', ['module' => $this->name(), 'action' => 'AdminEdit', 'block_id' => $params->integer('block_id', 0)]));
@@ -398,14 +398,18 @@ class VytuxMenu2Module extends AbstractModule implements ModuleCustomInterface, 
 
     public function postAdminMoveUpAction(ServerRequestInterface $request): ResponseInterface
     {
-        $this->repository()->move(Validator::queryParams($request)->integer('block_id', 0), -1);
+        $params = Validator::queryParams($request);
+
+        $this->repository()->move($params->integer('block_id', 0), -1, $params->integer('tree_id', 0) ?: null);
 
         return response();
     }
 
     public function postAdminMoveDownAction(ServerRequestInterface $request): ResponseInterface
     {
-        $this->repository()->move(Validator::queryParams($request)->integer('block_id', 0), 1);
+        $params = Validator::queryParams($request);
+
+        $this->repository()->move($params->integer('block_id', 0), 1, $params->integer('tree_id', 0) ?: null);
 
         return response();
     }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Vytux\WebtreesModules\VytuxMenu2;
 
 use function in_array;
+use function preg_match;
 
 /**
  * One configurable link in the menu.
@@ -37,5 +38,18 @@ final class MenuItem
         }
 
         return $this->access_level >= $user_access_level;
+    }
+
+    /**
+     * Reject addresses that a browser could run as script.  Browsers ignore control
+     * characters such as tabs and newlines inside a URL ("java\tscript:"), so reject them too.
+     */
+    public static function isSafeUrl(string $url): bool
+    {
+        if (preg_match('/[\x00-\x1F\x7F]/', $url) === 1) {
+            return false;
+        }
+
+        return preg_match('/^\s*(javascript|data|vbscript):/i', $url) !== 1;
     }
 }
