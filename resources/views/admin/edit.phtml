@@ -1,0 +1,101 @@
+<?php
+
+declare(strict_types=1);
+
+use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
+use Fisharebest\Webtrees\Http\RequestHandlers\ModulesAllPage;
+use Fisharebest\Webtrees\I18N;
+use Vytux\WebtreesModules\VytuxMenu2\IconSet;
+use Vytux\WebtreesModules\VytuxMenu2\MenuItem;
+use Vytux\WebtreesModules\VytuxMenu2\VytuxMenu2Module;
+
+/**
+ * @var array<int,string>    $access_levels
+ * @var IconSet              $icons
+ * @var MenuItem             $item
+ * @var VytuxMenu2Module     $module
+ * @var array<string,string> $themes
+ * @var string               $title
+ * @var array<string,string> $tree_options
+ */
+
+?>
+
+<?= view('components/breadcrumbs', ['links' => [route(ControlPanel::class) => I18N::translate('Control panel'), route(ModulesAllPage::class) => I18N::translate('Modules'), $module->getConfigLink() => $module->title(), $title]]) ?>
+
+<h1><?= $title ?></h1>
+
+<form method="post" enctype="multipart/form-data">
+    <input type="hidden" name="block_id" value="<?= $item->id ?>">
+
+    <div class="row mb-3">
+        <label for="menu_title" class="col-sm-3 col-form-label">
+            <?= I18N::translate('Menu title') ?>
+        </label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" name="menu_title" id="menu_title" value="<?= e($item->title) ?>" required>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="menu_address" class="col-sm-3 col-form-label">
+            <?= I18N::translate('Menu address') ?>
+        </label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" name="menu_address" id="menu_address" value="<?= e($item->url) ?>" dir="ltr" required>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="menu_access" class="col-sm-3 col-form-label">
+            <?= I18N::translate('Access level') ?>
+        </label>
+        <div class="col-sm-9">
+            <?= view('components/select', ['name' => 'menu_access', 'id' => 'menu_access', 'selected' => $item->access_level, 'options' => $access_levels]) ?>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="block_order" class="col-sm-3 col-form-label">
+            <?= I18N::translate('Menu position') ?>
+        </label>
+        <div class="col-sm-9">
+            <input type="number" class="form-control" name="block_order" id="block_order" value="<?= $item->order ?>" required>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="gedcom_id" class="col-sm-3 col-form-label">
+            <?= I18N::translate('Family tree') ?>
+        </label>
+        <div class="col-sm-9">
+            <?= view('components/select', ['name' => 'gedcom_id', 'id' => 'gedcom_id', 'selected' => (string) $item->tree_id, 'options' => $tree_options]) ?>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-3 col-form-label">
+            <?= I18N::translate('Show this menu for which languages?') ?>
+        </div>
+        <div class="col-sm-9">
+            <?= view('edit/language-checkboxes', ['languages' => $item->languages]) ?>
+        </div>
+    </div>
+
+    <?= view($module->name() . '::admin/icon-fields', ['icons' => $icons, 'module' => $module, 'target' => $item->id, 'themes' => $themes]) ?>
+
+    <div class="row mb-3">
+        <div class="offset-sm-3 col-sm-9">
+            <button type="submit" class="btn btn-primary">
+                <?= view('icons/save') ?>
+                <?= I18N::translate('save') ?>
+            </button>
+            <a href="<?= e($module->getConfigLink()) ?>" class="btn btn-secondary">
+                <?= view('icons/cancel') ?>
+                <?= I18N::translate('cancel') ?>
+            </a>
+        </div>
+    </div>
+
+    <?= csrf_field() ?>
+</form>

@@ -1,0 +1,162 @@
+<?php
+
+declare(strict_types=1);
+
+use Fisharebest\Webtrees\Auth;
+use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
+use Fisharebest\Webtrees\Http\RequestHandlers\ModulesAllPage;
+use Fisharebest\Webtrees\I18N;
+use Fisharebest\Webtrees\Tree;
+use Vytux\WebtreesModules\VytuxMenu2\MenuCss;
+use Vytux\WebtreesModules\VytuxMenu2\MenuItem;
+use Vytux\WebtreesModules\VytuxMenu2\VytuxMenu2Module;
+
+/**
+ * @var string               $custom_css
+ * @var array<MenuItem>      $items
+ * @var string               $menu_label
+ * @var VytuxMenu2Module     $module
+ * @var string               $title
+ * @var Tree|null            $tree
+ * @var array<string,string> $tree_names
+ * @var array<int,string>    $tree_titles
+ */
+
+$access_levels = Auth::accessLevelNames();
+$first_id      = $items === [] ? null : $items[array_key_first($items)]->id;
+$last_id       = $items === [] ? null : $items[array_key_last($items)]->id;
+
+?>
+
+<?= view('components/breadcrumbs', ['links' => [route(ControlPanel::class) => I18N::translate('Control panel'), route(ModulesAllPage::class) => I18N::translate('Modules'), $title]]) ?>
+
+<h1><?= $title ?></h1>
+
+<p>
+    <?= I18N::translate('Provides links to custom defined pages.') ?>
+</p>
+
+<?php if ($tree instanceof Tree) : ?>
+    <form method="post" class="row mb-3">
+        <div class="col-auto">
+            <div class="input-group">
+                <?= view('components/select', ['name' => 'tree', 'selected' => $tree->name(), 'options' => $tree_names, 'aria_label' => I18N::translate('Family tree')]) ?>
+                <input type="submit" class="btn btn-primary" value="<?= I18N::translate('show') ?>">
+            </div>
+        </div>
+
+        <?= csrf_field() ?>
+    </form>
+<?php endif ?>
+
+<p>
+    <a href="<?= e(route('module', ['module' => $module->name(), 'action' => 'AdminEdit'])) ?>" class="btn btn-link">
+        <?= view('icons/add') ?>
+        <?= I18N::translate('Add menu') ?>
+    </a>
+    <a href="<?= e(route('module', ['module' => $module->name(), 'action' => 'AdminIcons', 'target' => MenuCss::TARGET_MAIN])) ?>" class="btn btn-link">
+        <?= view('icons/edit') ?>
+        <?= I18N::translate('Icons for the menu') ?>
+    </a>
+    <a href="<?= e(route('module', ['module' => $module->name(), 'action' => 'AdminIcons', 'target' => MenuCss::TARGET_EDIT])) ?>" class="btn btn-link">
+        <?= view('icons/edit') ?>
+        <?= I18N::translate('Icons for “%s”', I18N::translate('Edit menus')) ?>
+    </a>
+</p>
+
+<table class="table table-bordered">
+    <caption>
+        <?= I18N::translate('Edit menus') ?>
+    </caption>
+
+    <thead>
+        <tr>
+            <th><?= I18N::translate('Menu position') ?></th>
+            <th><?= I18N::translate('Family tree') ?></th>
+            <th><?= I18N::translate('Menu title') ?></th>
+            <th><?= I18N::translate('Menu address') ?></th>
+            <th><?= I18N::translate('Access level') ?></th>
+            <th><?= I18N::translate('Icons') ?></th>
+            <th><?= I18N::translate('Move up') ?></th>
+            <th><?= I18N::translate('Move down') ?></th>
+            <th><?= I18N::translate('Edit') ?></th>
+            <th><?= I18N::translate('Delete') ?></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <?php foreach ($items as $item) : ?>
+            <tr>
+                <td><?= I18N::number($item->order) ?></td>
+                <td>
+                    <?php if ($item->tree_id === null) : ?>
+                        <?= I18N::translate('All') ?>
+                    <?php else : ?>
+                        <?= e($tree_titles[$item->tree_id] ?? (string) $item->tree_id) ?>
+                    <?php endif ?>
+                </td>
+                <td><?= e($item->title) ?></td>
+                <td><code><?= e($item->url) ?></code></td>
+                <td><?= $access_levels[$item->access_level] ?? I18N::number($item->access_level) ?></td>
+                <td>
+                    <?php foreach ($item->icon_keys as $key) : ?>
+                        <img src="<?= e($module->iconUrl($item->id, $key)) ?>" alt="<?= e($key) ?>" title="<?= e($key) ?>" style="max-width:24px;max-height:24px">
+                    <?php endforeach ?>
+                </td>
+                <td>
+                    <?php if ($item->id !== $first_id) : ?>
+                        <a href="#" data-wt-post-url="<?= e(route('module', ['module' => $module->name(), 'action' => 'AdminMoveUp', 'block_id' => $item->id, 'tree_id' => $tree?->id() ?? 0])) ?>" aria-label="<?= I18N::translate('Move up') ?>" class="btn btn-secondary">
+                            <?= view('icons/arrow-up') ?>
+                        </a>
+                    <?php endif ?>
+                </td>
+                <td>
+                    <?php if ($item->id !== $last_id) : ?>
+                        <a href="#" data-wt-post-url="<?= e(route('module', ['module' => $module->name(), 'action' => 'AdminMoveDown', 'block_id' => $item->id, 'tree_id' => $tree?->id() ?? 0])) ?>" aria-label="<?= I18N::translate('Move down') ?>" class="btn btn-secondary">
+                            <?= view('icons/arrow-down') ?>
+                        </a>
+                    <?php endif ?>
+                </td>
+                <td>
+                    <a href="<?= e(route('module', ['module' => $module->name(), 'action' => 'AdminEdit', 'block_id' => $item->id])) ?>" aria-label="<?= I18N::translate('Edit') ?>" class="btn btn-primary">
+                        <?= view('icons/edit') ?>
+                    </a>
+                </td>
+                <td>
+                    <a href="#" data-wt-post-url="<?= e(route('module', ['module' => $module->name(), 'action' => 'AdminDelete', 'block_id' => $item->id])) ?>" data-wt-confirm="<?= I18N::translate('Are you sure you want to delete this menu?') ?>" aria-label="<?= I18N::translate('Delete') ?>" class="btn btn-danger">
+                        <?= view('icons/delete') ?>
+                    </a>
+                </td>
+            </tr>
+        <?php endforeach ?>
+    </tbody>
+</table>
+
+<h2><?= I18N::translate('Preferences') ?></h2>
+
+<form method="post" action="<?= e(route('module', ['module' => $module->name(), 'action' => 'AdminSettings'])) ?>">
+    <div class="mb-3">
+        <label for="menu_label" class="form-label">
+            <?= I18N::translate('Menu label') ?>
+        </label>
+        <input type="text" class="form-control" name="menu_label" id="menu_label" value="<?= e($menu_label) ?>" placeholder="<?= I18N::translate('Menu') ?>">
+    </div>
+
+    <div class="mb-3">
+        <label for="custom_css" class="form-label">
+            <?= I18N::translate('Custom CSS') ?>
+        </label>
+        <textarea name="custom_css" id="custom_css" class="form-control font-monospace" rows="8" dir="ltr"><?= e($custom_css) ?></textarea>
+        <div class="form-text">
+            <?= I18N::translate('The menu uses the CSS class %s. Each item uses %s and %s.', '<code>.' . VytuxMenu2Module::CSS_CLASS . '</code>', '<code>.' . VytuxMenu2Module::CSS_CLASS . '-item</code>', '<code>.' . VytuxMenu2Module::CSS_CLASS . '-item-&lt;id&gt;</code>') ?>
+            <?= I18N::translate('To change only one theme, start the selector with %s.', '<code>.wt-theme-&lt;theme&gt;</code>') ?>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        <?= view('icons/save') ?>
+        <?= I18N::translate('save') ?>
+    </button>
+
+    <?= csrf_field() ?>
+</form>

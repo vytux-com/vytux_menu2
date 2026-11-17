@@ -1,0 +1,39 @@
+{
+    "name": "vytux/vytux_menu2",
+    "description": "A webtrees custom module that adds a configurable menu of links, with optional icons stored in the database.",
+    "type": "webtrees-module",
+    "license": "GPL-2.0-or-later",
+    "keywords": ["webtrees", "webtrees-module", "genealogy", "menu"],
+    "homepage": "https://github.com/vytux-com/vytux_menu2",
+    "authors": [
+        {
+            "name": "Vytautas Krivickas",
+            "homepage": "https://vytux.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/vytux-com/vytux_menu2/issues",
+        "source": "https://github.com/vytux-com/vytux_menu2"
+    },
+    "require": {
+        "php": ">=8.3",
+        "magicsunday/webtrees-module-installer-plugin": "^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.0 || ^12.0"
+    },
+    "scripts": {
+        "test": "phpunit --bootstrap vendor/autoload.php tests"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Vytux\\WebtreesModules\\VytuxMenu2\\": "src/",
+            "Vytux\\WebtreesModules\\VytuxMenu2\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "magicsunday/webtrees-module-installer-plugin": true
+        }
+    }
+}

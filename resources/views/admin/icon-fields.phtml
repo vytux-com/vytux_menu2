@@ -1,0 +1,63 @@
+<?php
+
+declare(strict_types=1);
+
+use Fisharebest\Webtrees\I18N;
+use Vytux\WebtreesModules\VytuxMenu2\IconSet;
+use Vytux\WebtreesModules\VytuxMenu2\IconValidator;
+use Vytux\WebtreesModules\VytuxMenu2\VytuxMenu2Module;
+
+/**
+ * Upload/remove fields for a set of icons.
+ *
+ * @var IconSet              $icons
+ * @var VytuxMenu2Module     $module
+ * @var int|string           $target
+ * @var array<string,string> $themes
+ */
+
+$keys = [IconSet::DEFAULT_KEY => I18N::translate('Default')] + $themes;
+
+?>
+
+<fieldset class="mb-3">
+    <legend class="col-form-label"><?= I18N::translate('Icons') ?></legend>
+
+    <p class="form-text">
+        <?= I18N::translate('Upload a PNG, JPEG, GIF or WebP image, up to %s.', I18N::number(IconValidator::MAX_BYTES / 1024) . ' KB') ?>
+        <?= I18N::translate('The default icon is used with the themes that show menu icons. Upload an icon for a specific theme to override it, or to add an icon to a theme that does not normally show menu icons.') ?>
+    </p>
+
+    <table class="table table-sm align-middle">
+        <thead>
+            <tr>
+                <th><?= I18N::translate('Theme') ?></th>
+                <th><?= I18N::translate('Icon') ?></th>
+                <th><?= I18N::translate('Upload') ?></th>
+                <th><?= I18N::translate('Delete') ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($keys as $key => $label) : ?>
+                <tr>
+                    <td><?= e($label) ?></td>
+                    <td>
+                        <?php if (is_string($target) || $target > 0) : ?>
+                            <?php if ($icons->has($key)) : ?>
+                                <img src="<?= e($module->iconUrl($target, $key)) ?>" alt="" style="max-width:64px;max-height:64px">
+                            <?php endif ?>
+                        <?php endif ?>
+                    </td>
+                    <td>
+                        <input type="file" class="form-control form-control-sm" name="icon_upload[<?= e($key) ?>]" accept="image/png,image/jpeg,image/gif,image/webp" aria-label="<?= I18N::translate('Upload') ?> <?= e($label) ?>">
+                    </td>
+                    <td>
+                        <?php if ($icons->has($key)) : ?>
+                            <input type="checkbox" class="form-check-input" name="icon_remove[]" value="<?= e($key) ?>" aria-label="<?= I18N::translate('Delete') ?> <?= e($label) ?>">
+                        <?php endif ?>
+                    </td>
+                </tr>
+            <?php endforeach ?>
+        </tbody>
+    </table>
+</fieldset>
